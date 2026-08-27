@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { MORNI_DATA } from "../data/morniData";
-import {
-  ArrowRight,
-  Droplets,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
+import mornihills from "../assets/images/tikkar-taal-boating.jpg.png";
+import { ArrowRight, Droplets, MapPin, Sparkles } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 export default function TikkarTaalFeature({
@@ -17,7 +13,7 @@ export default function TikkarTaalFeature({
   const [isHovered, setIsHovered] = useState(false);
 
   const tikkarAttraction = MORNI_DATA.attractions.find(
-    (a) => a.id === "tikkar-taal"
+    (a) => a.id === "tikkar-taal",
   );
 
   return (
@@ -36,7 +32,6 @@ export default function TikkarTaalFeature({
           BACKGROUND IMAGE
       ====================================================== */}
       <div className="absolute inset-0">
-
         <div
           className={`
             absolute
@@ -49,8 +44,7 @@ export default function TikkarTaalFeature({
             ${isHovered ? "scale-[1.02]" : "scale-100"}
           `}
           style={{
-            backgroundImage:
-              "url('/src/Images/tikkar-taal-boating.jpg.png')",
+            backgroundImage: `url(${mornihills})`,
           }}
         />
 
@@ -121,7 +115,6 @@ export default function TikkarTaalFeature({
           distance={25}
           className="relative w-full max-w-4xl"
         >
-
           {/* =================================================
               SOFT FROSTED BACKDROP
           ================================================= */}
@@ -159,7 +152,6 @@ export default function TikkarTaalFeature({
               lg:py-10
             "
           >
-
             {/* =================================================
                 FROSTED GLASS LIGHT
             ================================================= */}
@@ -196,7 +188,6 @@ export default function TikkarTaalFeature({
                 CONTENT
             ================================================= */}
             <div className="relative z-10">
-
               {/* =================================================
                   TOP LABELS
               ================================================= */}
@@ -210,7 +201,6 @@ export default function TikkarTaalFeature({
                   gap-2.5
                 "
               >
-
                 {/* Signature Attraction */}
                 <div
                   className="
@@ -240,9 +230,7 @@ export default function TikkarTaalFeature({
                     "
                   />
 
-                  <span>
-                    {tikkarTaalSpecial.badge}
-                  </span>
+                  <span>{tikkarTaalSpecial.badge}</span>
                 </div>
 
                 {/* Location */}
@@ -270,11 +258,8 @@ export default function TikkarTaalFeature({
                     "
                   />
 
-                  <span>
-                    Morni Hills, Haryana
-                  </span>
+                  <span>Morni Hills, Haryana</span>
                 </div>
-
               </div>
 
               {/* =================================================
@@ -340,7 +325,6 @@ export default function TikkarTaalFeature({
               >
                 Two Lakes.
                 <br />
-
                 <span
                   className="
                     font-medium
@@ -404,7 +388,6 @@ export default function TikkarTaalFeature({
                     "
                   >
                     <div className="flex items-start gap-3">
-
                       {/* Icon */}
                       <div
                         className="
@@ -431,7 +414,6 @@ export default function TikkarTaalFeature({
 
                       {/* Text */}
                       <div className="min-w-0">
-
                         <h3
                           className="
                             font-serif
@@ -456,9 +438,7 @@ export default function TikkarTaalFeature({
                         >
                           {feat.desc}
                         </p>
-
                       </div>
-
                     </div>
                   </div>
                 ))}
@@ -487,14 +467,12 @@ export default function TikkarTaalFeature({
                       px-2
                       sm:px-3
                       ${
-                        idx !==
-                        tikkarTaalSpecial.stats.length - 1
+                        idx !== tikkarTaalSpecial.stats.length - 1
                           ? "sm:border-r sm:border-white/20"
                           : ""
                       }
                     `}
                   >
-
                     <div
                       className="
                         font-serif
@@ -520,7 +498,6 @@ export default function TikkarTaalFeature({
                     >
                       {st.label}
                     </div>
-
                   </div>
                 ))}
               </div>
@@ -539,12 +516,10 @@ export default function TikkarTaalFeature({
                   sm:flex-row
                 "
               >
-
                 {/* Primary Button */}
                 <button
                   onClick={() =>
-                    tikkarAttraction &&
-                    onSelectAttraction(tikkarAttraction)
+                    tikkarAttraction && onSelectAttraction(tikkarAttraction)
                   }
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
@@ -567,9 +542,7 @@ export default function TikkarTaalFeature({
                     hover:bg-white
                   "
                 >
-                  <span>
-                    Explore Tikkar Taal
-                  </span>
+                  <span>Explore Tikkar Taal</span>
 
                   <ArrowRight
                     className="
@@ -608,7 +581,6 @@ export default function TikkarTaalFeature({
                 >
                   Book Lake Activities
                 </button>
-
               </div>
 
               {/* =================================================
@@ -674,7 +646,6 @@ export default function TikkarTaalFeature({
               >
                 Nature. Peace. Memories.
               </p>
-
             </div>
           </div>
         </ScrollReveal>
