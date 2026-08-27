@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #10201C;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2F6B5F;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8FB9A8;
+  }
+}
+
+@layer components {
+  /* Glassmorphism effects */
+  .glass-nav {
+    background: rgba(16, 32, 28, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(143, 185, 168, 0.15);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px -10px rgba(16, 32, 28, 0.08);
+  }
+
+  .dark .glass-card {
+    background: rgba(22, 44, 39, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(143, 185, 168, 0.12);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+  }
+
+  .glass-modal {
+    background: rgba(245, 247, 242, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(47, 107, 95, 0.2);
+  }
+
+  .dark .glass-modal {
+    background: rgba(16, 32, 28, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(143, 185, 168, 0.2);
+  }
+
+  .badge-emerald {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-morni-primary/10 text-morni-primary dark:bg-morni-secondary/20 dark:text-morni-secondary border border-morni-primary/20 dark:border-morni-secondary/30;
+  }
+
+  .badge-gold {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-morni-accent/15 text-morni-accent-hover dark:text-morni-accent border border-morni-accent/30;
+  }
+
+  .heading-hero {
+    @apply font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white;
+  }
+
+  .heading-section {
+    @apply font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-morni-dark dark:text-white;
+  }
+
+  .subheading-section {
+    @apply text-base sm:text-lg text-morni-dark/70 dark:text-morni-light/70 max-w-2xl mx-auto;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm sm:text-base text-white bg-morni-primary hover:bg-morni-primary-dark active:scale-[0.98] transition-all duration-300 shadow-lg shadow-morni-primary/25 hover:shadow-xl hover:shadow-morni-primary/40 cursor-pointer;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm sm:text-base text-morni-dark bg-morni-accent hover:bg-morni-accent-hover active:scale-[0.98] transition-all duration-300 shadow-lg shadow-morni-accent/25 hover:shadow-xl hover:shadow-morni-accent/40 cursor-pointer;
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm sm:text-base text-white bg-white/10 hover:bg-white/20 active:scale-[0.98] backdrop-blur-md border border-white/30 hover:border-white/50 transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium text-sm text-morni-dark dark:text-morni-light bg-transparent hover:bg-morni-primary/10 dark:hover:bg-morni-secondary/10 border border-morni-dark/20 dark:border-morni-secondary/30 transition-all duration-300 cursor-pointer;
+  }
+}
+
+/* Custom cinematic animations */
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-25px) translateX(15px) scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+}
+
+.animate-float-particle {
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+/* Gentle slow cloud drifting */
+@keyframes cloudDriftSlowGentle {
+  0% {
+    transform: translateX(-12vw) translateY(0px) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(15vw) translateY(-6px) scale(1.03);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(40vw) translateY(0px) scale(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes cloudDriftReverseGentle {
+  0% {
+    transform: translateX(20vw) translateY(0px) scale(1.04);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(-8vw) translateY(8px) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(-35vw) translateY(0px) scale(1.04);
+    opacity: 0.5;
+  }
+}
+
+.animate-cloud-drift-slow {
+  animation: cloudDriftSlowGentle 65s ease-in-out infinite alternate;
+}
+
+.animate-cloud-drift-reverse {
+  animation: cloudDriftReverseGentle 80s ease-in-out infinite alternate;
+}
+
+/* Image zoom on hover */
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
+}
