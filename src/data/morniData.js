@@ -1,5 +1,6 @@
 // Morni Hills Tourism Data Store
 
+
 export const MORNI_DATA = {
   meta: {
     title: "Morni Hills",
@@ -388,7 +389,7 @@ export const MORNI_DATA = {
       title: "Tikkar Taal Morning Mist",
       category: "Lakes",
       aspect: "landscape",
-      image: "/src/Images/Tikkar Taal Morning Mist.png",
+      image: "../public/assets/Tikkar Taal Morning Mist.png",
       location: "Tikkar Taal, Morni"
     },
     {
