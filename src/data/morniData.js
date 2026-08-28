@@ -389,7 +389,7 @@ export const MORNI_DATA = {
       title: "Tikkar Taal Morning Mist",
       category: "Lakes",
       aspect: "landscape",
-      image: "../public/assets/Tikkar Taal Morning Mist.png",
+      image: "/assets/Tikkar Taal Morning Mist.png",
       location: "Tikkar Taal, Morni"
     },
     {
