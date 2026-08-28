@@ -73,7 +73,7 @@ export const MORNI_DATA = {
       category: "Spiritual",
       tagline: "10th-century stone temple with ancient carvings",
       description: "An ancient shrine believed to date back to the 10th-century Pandava era, dedicated to Lord Krishna. The temple displays stone relief carvings and traditional hill-style masonry, nestled beside a mountain brook near Tikkar Taal.",
-      image: "/src/Images/Thakurdwara Temple.png",
+      image: "/assets/Thakurdwara Temple.png",
       elevation: "1,050 m",
       timings: "06:00 AM – 08:00 PM",
       entryFee: "Free",
@@ -332,7 +332,7 @@ export const MORNI_DATA = {
       name: "Yadavindra Gardens (Pinjore)",
       distance: "28 km from Morni",
       driveTime: "45 mins",
-      image: "/src/Images/Yadavindra Gardens.png",
+      image: "/assets/Yadavindra Gardens.png",
       description: "A 17th-century Mughal-style terraced garden covering 100 acres with multi-level fountains, historic Sheesh Mahal, Rang Mahal, and illuminated water cascades.",
       highlights: ["Terraced Mughal Design", "Water Fountains & Canals", "Heritage Architecture", "Evening Light Show"]
     },
@@ -341,7 +341,7 @@ export const MORNI_DATA = {
       name: "Sukhna Lake (Chandigarh)",
       distance: "42 km from Morni",
       driveTime: "1 hour",
-      image: "/src/Images/Sukhna Lake.png",
+      image: "/assets/Sukhna Lake.png",
       description: "Chandigarh's picturesque 3 km² rain-fed reservoir against the Shivalik backdrop. Ideal for sunrise jogging, rowing, solar boat rides, and waterside dining.",
       highlights: ["Rowing & Boating", "Promenade Walking", "Migratory Birds", "Le Corbusier Architecture"]
     },
@@ -350,7 +350,7 @@ export const MORNI_DATA = {
       name: "Nada Sahib Gurudwara",
       distance: "30 km from Morni",
       driveTime: "40 mins",
-        image: "/src/Images/Nada Sahib.png",
+        image: "/assets/Nada Sahib.png",
       description: "A revered historic Sikh shrine on the quiet banks of the Ghaggar river, visited by Guru Gobind Singh Ji in 1688. Known for its peaceful sanctum and 24/7 community langar.",
       highlights: ["Historic Sikh Pilgrimage", "Peaceful Riverbank", "Continuous Langar", "Golden Architecture"]
     },
@@ -359,7 +359,7 @@ export const MORNI_DATA = {
       name: "Timber Trail Cable Car (Parwanoo)",
       distance: "40 km from Morni",
       driveTime: "55 mins",
-      image: "/src/Images/Timber Trail Cable Car.png",
+      image: "/assets/Timber Trail Cable Car.png",
       description: "An exhilarating 1.8 km cable car ride soaring high above deep mountain gorges and pine valleys, connecting two picturesque hilltops with panoramic cafes.",
       highlights: ["Aerial Cable Car", "Deep Mountain Gorge", "Hilltop Resort & Cafe", "Thrill Experience"]
     },
@@ -368,7 +368,7 @@ export const MORNI_DATA = {
       name: "Kasauli Hill Town",
       distance: "52 km from Morni",
       driveTime: "1 hr 25 mins",
-      image: "/src/Images/Kasauli Hill Town.png",
+      image: "/assets/Kasauli Hill Town.png",
       description: "A charming colonial-era hill town in Himachal Pradesh known for cobblestone streets, Christ Church, Monkey Point, and the famous Gilbert Nature Trail.",
       highlights: ["Colonial Architecture", "Gilbert Trail Walk", "Upper & Lower Malls", "Pine Forest Vistas"]
     },
@@ -377,7 +377,7 @@ export const MORNI_DATA = {
       name: "National Cactus Garden (Panchkula)",
       distance: "33 km from Morni",
       driveTime: "45 mins",
-      image: "/src/Images/National Cactus Garden.png",
+      image: "/assets/National Cactus Garden.png",
       description: "Asia's largest outdoor botanical garden dedicated to rare cacti and succulents, featuring over 3,500 endangered species across 7 acres.",
       highlights: ["Asia's Largest Cactus Collection", "Botanical Heritage", "Bonsai Section", "Photographer Haven"]
     }
@@ -397,7 +397,7 @@ export const MORNI_DATA = {
       title: "Shivalik Valley Sunbeams",
       category: "Mountains",
       aspect: "portrait",
-      image: "/src/Images/Shivalik Valley Sunbeams.png",
+      image: "/assets/Shivalik Valley Sunbeams.png",
       location: "Karoh Peak Viewpoint"
     },
     {
@@ -405,7 +405,7 @@ export const MORNI_DATA = {
       title: "Morni Fort Hilltop Ruins",
       category: "Heritage",
       aspect: "square",
-      image: "/src/Images/Morni Fort Hilltop Ruins.png",
+      image: "/assets/Morni Fort Hilltop Ruins.png",
       location: "Morni Fort Grounds"
     },
     {
@@ -413,7 +413,7 @@ export const MORNI_DATA = {
       title: "Aromatic Pine Canopy Walk",
       category: "Nature",
       aspect: "landscape",
-      image: "/src/Images/Aromatic Pine Canopy Walk.png",
+      image: "/assets/Aromatic Pine Canopy Walk.png",
       location: "Mandhana Forest Reserve"
     },
     {
@@ -421,7 +421,7 @@ export const MORNI_DATA = {
       title: "Luxury Glamping Under the Stars",
       category: "Stays",
       aspect: "landscape",
-      image: "/src/Images/Luxury Glamping Under the Stars.png",
+      image: "/assets/Luxury Glamping Under the Stars.png",
       location: "Tikkar Taal Shore"
     },
     {
@@ -429,7 +429,7 @@ export const MORNI_DATA = {
       title: "Golden Hour Crimson Sky",
       category: "Sunsets",
       aspect: "portrait",
-      image: "/src/Images/Golden Hour Crimson Sky.png",
+      image: "/assets/Golden Hour Crimson Sky.png",
       location: "Morni Ridge Road"
     },
     {
@@ -437,7 +437,7 @@ export const MORNI_DATA = {
       title: "Authentic Mountain Kulhad Chai & Delicacies",
       category: "Dining",
       aspect: "square",
-      image: "/src/Images/Authentic Mountain Kulhad Chai & Delicacies.png",
+      image: "/assets/Authentic Mountain Kulhad Chai & Delicacies.png",
       location: "Shivalik Pine Kitchen"
     },
     {
@@ -445,7 +445,7 @@ export const MORNI_DATA = {
       title: "Tranquil Water Reflections",
       category: "Lakes",
       aspect: "landscape",
-      image: "/src/Images/Tranquil Water Reflections.png",
+      image: "/assets/Tranquil Water Reflections.png",
       location: "Chota Taal"
     },
     {
@@ -453,7 +453,7 @@ export const MORNI_DATA = {
       title: "Historic Ancient Temple Stone Carvings",
       category: "Heritage",
       aspect: "portrait",
-      image: "/src/Images/Historic Ancient Temple Stone Carvings.png",
+      image: "/assets/Historic Ancient Temple Stone Carvings.png",
       location: "Thakurdwara Temple"
     }
   ],
