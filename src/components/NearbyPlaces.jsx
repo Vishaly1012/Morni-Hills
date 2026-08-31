@@ -1,12 +1,14 @@
 import React from 'react';
 import { MORNI_DATA } from '../data/morniData';
 import { Navigation, MapPin, Clock, ArrowUpRight, Compass, Sparkles } from 'lucide-react';
+import {cssData} from "./cssData.js"
 
 export default function NearbyPlaces({ onSelectNearby }) {
   const { nearbyPlaces } = MORNI_DATA;
+  console.log(cssData)
 
   return (
-    <section id="nearby" className="py-24 md:py-32 relative bg-morni-light-surface dark:bg-morni-dark/95 transition-colors duration-500">
+    <section id="nearby" className={`py-${cssData.py} md:py-${cssData.md_py} relative bg-morni-light-surface dark:bg-morni-dark/95 transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

@@ -3,12 +3,14 @@ import { MORNI_DATA } from '../data/morniData';
 import IMAGES from '../assets/images';
 import { CheckCircle2, Trees, Mountain, MapPin, Feather, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import {cssData} from "./cssData.js"
+
 
 export default function About() {
   const { about } = MORNI_DATA;
 
   return (
-    <section id="about" className="py-24 md:py-32 relative bg-morni-light dark:bg-morni-dark transition-colors duration-500 overflow-hidden">
+    <section id="about" className={`py-${cssData.py} md:py-${cssData.md_py}relative bg-morni-light dark:bg-morni-dark transition-colors duration-500 overflow-hidden`}>
       {/* Subtle background ambient blur circles */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-morni-secondary/10 dark:bg-morni-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -right-40 w-96 h-96 bg-morni-accent/10 rounded-full blur-3xl pointer-events-none" />

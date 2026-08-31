@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MORNI_DATA } from "../data/morniData";
+import {cssData} from "./cssData.js"
+
 import {
   Calendar,
   Send,
@@ -67,7 +69,7 @@ export default function Contact({ prefilledStay }) {
   return (
     <section
       id="contact"
-      className="py-24 md:py-32 relative bg-morni-light dark:bg-morni-dark transition-colors duration-500"
+      className={`py-${cssData.py} md:py-${cssData.md_py} relative bg-morni-light dark:bg-morni-dark transition-colors duration-500`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

@@ -6,7 +6,7 @@ export default function Resorts({ onSelectStay, onOpenPlanner }) {
   const { resorts } = MORNI_DATA;
 
   return (
-    <section id="stay" className="py-24 md:py-32 relative bg-morni-light dark:bg-morni-dark transition-colors duration-500">
+    <section id="stay" className="py-9 md:py-25 relative bg-morni-light dark:bg-morni-dark transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

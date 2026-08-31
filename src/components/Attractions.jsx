@@ -3,6 +3,8 @@ import { MORNI_DATA } from '../data/morniData';
 import AttractionCard from './AttractionCard';
 import ScrollReveal from './ScrollReveal';
 import { Compass, Sparkles, Filter } from 'lucide-react';
+import {cssData} from "./cssData.js"
+
 
 const CATEGORIES = ['All', 'Nature & Lakes', 'Heritage', 'Viewpoints', 'Adventure', 'Activities'];
 
@@ -16,7 +18,7 @@ export default function Attractions({ onSelectAttraction }) {
       );
 
   return (
-    <section id="explore" className="py-24 md:py-32 relative bg-morni-light-surface dark:bg-morni-dark/95 transition-colors duration-500">
+    <section id="explore" className={`py-${cssData.py} md:py-${cssData.md_py}  relative bg-morni-light-surface dark:bg-morni-dark/95 transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

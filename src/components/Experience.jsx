@@ -1,19 +1,8 @@
 import React from 'react';
 import { MORNI_DATA } from '../data/morniData';
 import ScrollReveal from './ScrollReveal';
-import {
-  Trees,
-  Camera,
-  Mountain,
-  Tent,
-  Compass,
-  Feather,
-  Home,
-  Sun,
-  Clock,
-  Sparkles,
-  ArrowUpRight
-} from 'lucide-react';
+import {Trees,Camera, Mountain, Tent,Compass,Feather, Home,Sun,Clock,Sparkles,ArrowUpRight} from 'lucide-react';
+import {cssData} from "./cssData.js"
 
 const ICON_MAP = {
   Trees: Trees,
@@ -30,7 +19,7 @@ export default function Experience({ onOpenPlanner }) {
   const { experiences } = MORNI_DATA;
 
   return (
-    <section id="experiences" className="py-24 md:py-32 relative bg-morni-light dark:bg-morni-dark transition-colors duration-500">
+    <section id="experiences" className={`py-${cssData.py} md:py-${cssData.md_py} relative bg-morni-light dark:bg-morni-dark transition-colors duration-500`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
