@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Compass, ArrowDown, Sparkles, MapPin, Wind, ThermometerSun, ShieldCheck } from 'lucide-react';
 import IMAGES from '../assets/images';
 
-export default function Hero({ onOpenPlanner }) {
+export default function Hero({ onOpenPlanner , darkMode }) {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   const handleMouseMove = (e) => {
@@ -46,7 +46,9 @@ export default function Hero({ onOpenPlanner }) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-morni-dark"
+      className={`relative w-full min-h-screen flex items-center justify-center overflow-hidden ${
+  darkMode ? "bg-morni-dark" : "bg-slate-100"
+}`}
     >
       {/* 1. Cinematic Background Layer with Parallax & Realistic Photography */}
       <div

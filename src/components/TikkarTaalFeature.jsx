@@ -4,11 +4,9 @@ import mornihills from "../assets/images/tikkar-taal-boating.jpg.png";
 import { ArrowRight, Droplets, MapPin, Sparkles } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-export default function TikkarTaalFeature({
-  onSelectAttraction,
-  onOpenPlanner,
-}) {
+export default function TikkarTaalFeature({onSelectAttraction, onOpenPlanner,}) {
   const { tikkarTaalSpecial } = MORNI_DATA;
+  
 
   const [isHovered, setIsHovered] = useState(false);
 

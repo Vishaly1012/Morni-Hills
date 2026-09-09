@@ -18,14 +18,15 @@ export default function About() {
   return (
     <section
       id="about"
-      className={`py-${cssData.py} md:py-${cssData.md_py}relative bg-morni-light dark:bg-morni-dark transition-colors duration-500 overflow-hidden`}
+      className={`pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28 min-h-screen relative bg-morni-light dark:bg-morni-dark transition-colors duration-500 overflow-hidden`}
     >
       {/* Subtle background ambient blur circles */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-morni-secondary/10 dark:bg-morni-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -right-40 w-96 h-96 bg-morni-accent/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+          {" "}
           {/* Left Column: Realistic Photography with layered cards & badges */}
           <div className="lg:col-span-6 relative">
             <ScrollReveal delay={0} distance={45}>
@@ -41,7 +42,7 @@ export default function About() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-[450px] sm:h-[520px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-[480px] sm:h-[560px] lg:h-[600px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
 
                   {/* Image Overlay Gradient */}
@@ -76,7 +77,6 @@ export default function About() {
               </div>
             </ScrollReveal>
           </div>
-
           {/* Right Column: Narrative & Stats */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <ScrollReveal delay={100} distance={35}>

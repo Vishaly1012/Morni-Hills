@@ -1,96 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import {
-  Mountain,
-  Menu,
-  X,
-  Sun,
-  Moon,
-  Calendar,
-  ChevronDown,
-  Castle,
-  Waves,
-  Church,
-  Trees,
-  MapPin,
-} from "lucide-react";
+import { Mountain, Menu, X, Sun, Moon,Calendar, Hotel, ChevronDown,Castle, Waves,MapPin,} from "lucide-react";
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 const NAV_LINKS = [
-  {
-    name: "Home",
-    href: "#hero",
-  },
+  { name: "Home", href: "/", },
 
-  {
-    name: "About",
-    href: "#about",
-  },
+  { name: "About",href: "/about",},
 
   {
     name: "Explore",
-
     dropdown: [
       {
         name: "Morni Fort",
-        href: "#explore",
+        href: "/explore",
         icon: Castle,
         description: "Historic hilltop fort",
       },
 
       {
         name: "Tikkar Taal",
-        href: "#tikkar-taal-feature",
+        href: "/explore/tikkar-taal",
         icon: Waves,
         description: "Lakeside & boating",
       },
 
       {
-        name: "Temples",
-        href: "#explore",
-        icon: Church,
-        description: "Peaceful spiritual places",
+        name: "Resorts & Stays",
+        href: "/stay",
+        icon: Hotel,
+        description: "Hotels & peaceful stays",
       },
 
-      {
-        name: "Viewpoints",
-        href: "#explore",
-        icon: Mountain,
-        description: "Scenic mountain views",
-      },
-
-      {
-        name: "Forest Areas",
-        href: "#explore",
-        icon: Trees,
-        description: "Nature & forest trails",
-      },
-
-      {
-        name: "Nearby Places",
-        href: "#nearby",
-        icon: MapPin,
-        description: "Places around Morni",
-      },
+      // {
+      //   name: "Nearby Places",
+      //   href: "/nearby",
+      //   icon: MapPin,
+      //   description: "Places around Morni",
+      // },
     ],
   },
 
   {
     name: "Experience",
-    href: "#experiences",
+    href: "/experience",
   },
 
-  {
-    name: "Stay",
-    href: "#stay",
-  },
+  // {
+  //   name: "Stay",
+  //   href: "/stay",
+  // },
 
   {
     name: "Contact",
-    href: "#contact",
+    href: "/contact",
   },
 ];
 
@@ -98,87 +65,43 @@ const NAV_LINKS = [
    NAVBAR COMPONENT
 ========================================================= */
 
-export default function Navbar({
-  darkMode,
-  setDarkMode,
-  onOpenPlanner,
-}) {
+export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,}) 
+{
+  const location = useLocation();
+
+  console.log("Dark mode toggled:", darkMode, setDarkMode)
+
+  
+
   /* =======================================================
      STATE
   ======================================================= */
 
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const [mobileMenuOpen, setMobileMenuOpen] =
-    useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [activeSection, setActiveSection] =
-    useState("hero");
+  const [openDropdown, setOpenDropdown] = useState(null);
 
-  const [openDropdown, setOpenDropdown] =
-    useState(null);
-
-  const [mobileDropdown, setMobileDropdown] =
-    useState(null);
+  const [mobileDropdown, setMobileDropdown] = useState(null);
 
   /* =======================================================
      SCROLL DETECTION
   ======================================================= */
-
-  useEffect(() => {
+   console.log("Dark mode toggled:", typeof(setDarkMode))
+  React.useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      setIsScrolled(scrollY > 40);
-
-      const sections = NAV_LINKS.filter(
-        (link) => link.href
-      ).map((link) =>
-        link.href.substring(1)
-      );
-
-      const scrollPosition =
-        scrollY + 200;
-
-      for (
-        let i = sections.length - 1;
-        i >= 0;
-        i--
-      ) {
-        const element =
-          document.getElementById(
-            sections[i]
-          );
-
-        if (
-          element &&
-          element.offsetTop <=
-            scrollPosition
-        ) {
-          setActiveSection(
-            sections[i]
-          );
-
-          break;
-        }
-      }
+      setIsScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      }
-    );
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     handleScroll();
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -186,7 +109,7 @@ export default function Navbar({
      ESCAPE KEY
   ======================================================= */
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setOpenDropdown(null);
@@ -195,69 +118,58 @@ export default function Navbar({
       }
     };
 
-    document.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   /* =======================================================
-     SMOOTH SCROLL
+     CLOSE MENU AFTER ROUTE CHANGE
   ======================================================= */
 
-  const handleNavClick = (
-    event,
-    href
-  ) => {
-    event.preventDefault();
-
+  React.useEffect(() => {
     setMobileMenuOpen(false);
     setOpenDropdown(null);
     setMobileDropdown(null);
 
-    const targetId =
-      href.substring(1);
-
-    const element =
-      document.getElementById(
-        targetId
-      );
-
-    if (!element) return;
-
-    const navbarOffset = 80;
-
-    const offsetTop =
-      element.getBoundingClientRect()
-        .top +
-      window.pageYOffset -
-      navbarOffset;
-
     window.scrollTo({
-      top: offsetTop,
+      top: 0,
       behavior: "smooth",
     });
-  };
+  }, [location.pathname]);
 
   /* =======================================================
      MOBILE DROPDOWN
   ======================================================= */
 
-  const handleMobileDropdown = (
-    name
-  ) => {
+  const handleMobileDropdown = (name) => {
     setMobileDropdown(
-      mobileDropdown === name
-        ? null
-        : name
+      mobileDropdown === name ? null : name
     );
+  };
+
+  /* =======================================================
+     CHECK ACTIVE PAGE
+  ======================================================= */
+
+  const isActivePage = (href) => {
+    if (href === "/") {
+      return location.pathname === "/";
+    }
+
+    return location.pathname.startsWith(href);
+  };
+
+  /* =======================================================
+     CLOSE MENUS
+  ======================================================= */
+
+  const closeMenus = () => {
+    setMobileMenuOpen(false);
+    setOpenDropdown(null);
+    setMobileDropdown(null);
   };
 
   /* =======================================================
@@ -276,7 +188,6 @@ export default function Navbar({
           top-0
           left-0
           right-0
-
           z-50
 
           transition-all
@@ -332,14 +243,9 @@ export default function Navbar({
                 LOGO
             ================================================= */}
 
-            <a
-              href="#hero"
-              onClick={(event) =>
-                handleNavClick(
-                  event,
-                  "#hero"
-                )
-              }
+            <Link
+              to="/"
+              onClick={closeMenus}
               className="
                 flex
                 items-center
@@ -347,7 +253,6 @@ export default function Navbar({
 
                 group
                 cursor-pointer
-
                 select-none
 
                 drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]
@@ -457,7 +362,7 @@ export default function Navbar({
                   Haryana Tourism
                 </span>
               </div>
-            </a>
+            </Link>
 
             {/* =================================================
                 DESKTOP NAVIGATION
@@ -473,567 +378,488 @@ export default function Navbar({
                 space-x-1
               "
             >
-              {NAV_LINKS.map(
-                (link) => {
-                  const hasDropdown =
-                    Boolean(
-                      link.dropdown
-                    );
+              {NAV_LINKS.map((link) => {
+                const hasDropdown = Boolean(
+                  link.dropdown
+                );
 
-                  const isActive =
-                    link.href
-                      ? activeSection ===
-                        link.href.substring(
-                          1
-                        )
-                      : false;
+                const isActive = link.href
+                  ? isActivePage(link.href)
+                  : false;
 
-                  return (
-                    <div
-                      key={link.name}
-                      className={`
-                        relative
+                return (
+                  <div
+                    key={link.name}
+                    className={`
+                      relative
 
-                        ${
-                          hasDropdown
-                            ? "explore-dropdown"
-                            : ""
-                        }
-                      `}
+                      ${
+                        hasDropdown
+                          ? "explore-dropdown"
+                          : ""
+                      }
+                    `}
+                    onMouseEnter={() => {
+                      if (hasDropdown) {
+                        setOpenDropdown(link.name);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (hasDropdown) {
+                        setOpenDropdown(null);
+                      }
+                    }}
+                  >
+                    {/* =================================================
+                        NORMAL NAV LINK
+                    ================================================= */}
 
+                    {!hasDropdown ? (
+                      <Link
+                        to={link.href}
+                        onClick={closeMenus}
+                        className={`
+                          relative
+
+                          px-3.5
+                          py-2
+
+                          flex
+                          items-center
+
+                          text-xs
+
+                          font-medium
+
+                          uppercase
+
+                          tracking-wider
+
+                          transition-all
+                          duration-300
+                          ease-out
+
+                          drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
+
+                          ${
+                            isActive
+                              ? `
+                                text-morni-accent
+                                font-bold
+                              `
+                              : `
+                                text-white/85
+                                hover:text-white
+                              `
+                          }
+                        `}
+                      >
+                        <span>{link.name}</span>
+
+                        {isActive && (
+                          <span
+                            className="
+                              absolute
+
+                              bottom-0
+
+                              left-3.5
+                              right-3.5
+
+                              h-[2px]
+
+                              rounded-full
+
+                              bg-morni-accent
+
+                              transition-all
+                              duration-300
+                            "
+                          />
+                        )}
+                      </Link>
+                    ) : (
                       /* =================================================
-                         HOVER OPEN / CLOSE
+                         EXPLORE BUTTON
                       ================================================= */
 
-                      onMouseEnter={() => {
-                        if (
-                          hasDropdown
-                        ) {
-                          setOpenDropdown(
-                            link.name
-                          );
+                      <button
+                        type="button"
+                        aria-expanded={
+                          openDropdown === link.name
                         }
-                      }}
+                        className={`
+                          relative
 
-                      onMouseLeave={() => {
-                        if (
-                          hasDropdown
-                        ) {
-                          setOpenDropdown(
-                            null
-                          );
-                        }
-                      }}
-                    >
-                      {/* =================================================
-                          NORMAL NAV LINK
-                      ================================================= */}
+                          px-3.5
+                          py-2
 
-                      {!hasDropdown ? (
-                        <a
-                          href={
-                            link.href
-                          }
-                          onClick={(
-                            event
-                          ) =>
-                            handleNavClick(
-                              event,
-                              link.href
+                          flex
+                          items-center
+
+                          gap-1
+
+                          text-xs
+
+                          font-medium
+
+                          uppercase
+
+                          tracking-wider
+
+                          transition-all
+                          duration-300
+                          ease-out
+
+                          drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
+
+                          cursor-default
+
+                          ${
+                            location.pathname.startsWith(
+                              "/explore"
                             )
+                              ? `
+                                text-morni-accent
+                                font-bold
+                              `
+                              : `
+                                text-white/85
+                                hover:text-white
+                              `
                           }
+                        `}
+                      >
+                        <span>{link.name}</span>
+
+                        <ChevronDown
                           className={`
-                            relative
+                            w-3.5
+                            h-3.5
 
-                            px-3.5
-                            py-2
-
-                            flex
-                            items-center
-
-                            text-xs
-
-                            font-medium
-
-                            uppercase
-
-                            tracking-wider
-
-                            transition-all
+                            transition-transform
                             duration-300
-                            ease-out
-
-                            drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
-
-                            ${
-                              isActive
-                                ? `
-                                  text-morni-accent
-                                  font-bold
-                                `
-                                : `
-                                  text-white/85
-                                  hover:text-white
-                                `
-                            }
-                          `}
-                        >
-                          <span>
-                            {
-                              link.name
-                            }
-                          </span>
-
-                          {isActive && (
-                            <span
-                              className="
-                                absolute
-
-                                bottom-0
-
-                                left-3.5
-                                right-3.5
-
-                                h-[2px]
-
-                                rounded-full
-
-                                bg-morni-accent
-
-                                transition-all
-                                duration-300
-                              "
-                            />
-                          )}
-                        </a>
-                      ) : (
-
-                        /* =================================================
-                           EXPLORE BUTTON
-                        ================================================= */
-
-                        <button
-                          type="button"
-
-                          aria-expanded={
-                            openDropdown ===
-                            link.name
-                          }
-
-                          className={`
-                            relative
-
-                            px-3.5
-                            py-2
-
-                            flex
-                            items-center
-
-                            gap-1
-
-                            text-xs
-
-                            font-medium
-
-                            uppercase
-
-                            tracking-wider
-
-                            transition-all
-                            duration-300
-                            ease-out
-
-                            drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
-
-                            cursor-default
 
                             ${
                               openDropdown ===
                               link.name
-                                ? `
-                                  text-morni-accent
-                                  font-bold
-                                `
-                                : `
-                                  text-white/85
-                                  hover:text-white
-                                `
+                                ? "rotate-180"
+                                : ""
                             }
                           `}
+                        />
+
+                        {location.pathname.startsWith(
+                          "/explore"
+                        ) && (
+                          <span
+                            className="
+                              absolute
+
+                              bottom-0
+
+                              left-3.5
+                              right-3.5
+
+                              h-[2px]
+
+                              rounded-full
+
+                              bg-morni-accent
+                            "
+                          />
+                        )}
+                      </button>
+                    )}
+
+                    {/* =================================================
+                        DROPDOWN
+                    ================================================= */}
+
+                    {hasDropdown && (
+                      <div
+                        className={`
+                          absolute
+
+                          top-full
+
+                          left-1/2
+
+                          -translate-x-1/2
+
+                          z-50
+
+                          pt-4
+
+                          transition-all
+                          duration-300
+                          ease-out
+
+                          ${
+                            openDropdown === link.name
+                              ? `
+                                visible
+                                opacity-100
+                                translate-y-0
+                                pointer-events-auto
+                              `
+                              : `
+                                invisible
+                                opacity-0
+                                -translate-y-2
+                                pointer-events-none
+                              `
+                          }
+                        `}
+                      >
+                        {/* GLASS CARD */}
+
+                        <div
+                          className="
+                            relative
+
+                            w-[270px]
+
+                            overflow-hidden
+
+                            rounded-[18px]
+
+                            border
+                            border-white/45
+
+                            bg-white/[0.72]
+
+                            backdrop-blur-[30px]
+
+                            shadow-[0_20px_55px_rgba(0,0,0,0.22)]
+
+                            ring-1
+                            ring-black/[0.04]
+
+                            p-1.5
+                          "
                         >
-                          <span>
-                            {link.name}
-                          </span>
+                          {/* GLASS REFLECTION */}
 
-                          <ChevronDown
-                            className={`
-                              w-3.5
-                              h-3.5
+                          <div
+                            className="
+                              pointer-events-none
 
-                              transition-transform
-                              duration-300
-                              ease-out
+                              absolute
+                              inset-0
 
-                              ${
-                                openDropdown ===
-                                link.name
-                                  ? "rotate-180"
-                                  : ""
-                              }
-                            `}
+                              bg-gradient-to-br
+
+                              from-white/70
+
+                              via-white/30
+
+                              to-white/[0.08]
+                            "
                           />
 
-                          {openDropdown ===
-                            link.name && (
-                            <span
-                              className="
-                                absolute
+                          {/* TOP LIGHT */}
 
-                                bottom-0
+                          <div
+                            className="
+                              pointer-events-none
 
-                                left-3.5
-                                right-3.5
+                              absolute
 
-                                h-[2px]
+                              top-0
 
-                                rounded-full
+                              left-8
+                              right-8
 
-                                bg-morni-accent
-                              "
-                            />
-                          )}
-                        </button>
-                      )}
+                              h-px
 
-                      {/* =================================================
-                          GLASSMORPHIC DROPDOWN
-                      ================================================= */}
+                              bg-gradient-to-r
 
-                      {hasDropdown && (
-                        <div
-                          className={`
-                            absolute
+                              from-transparent
 
-                            top-full
+                              via-white
 
-                            left-1/2
+                              to-transparent
+                            "
+                          />
 
-                            -translate-x-1/2
+                          {/* SOFT GLOW */}
 
-                            z-50
+                          <div
+                            className="
+                              pointer-events-none
 
-                            pt-4
+                              absolute
 
-                            transition-all
-                            duration-300
-                            ease-out
+                              -top-16
 
-                            ${
-                              openDropdown ===
-                              link.name
-                                ? `
-                                  visible
-                                  opacity-100
-                                  translate-y-0
-                                  pointer-events-auto
-                                `
-                                : `
-                                  invisible
-                                  opacity-0
-                                  -translate-y-2
-                                  pointer-events-none
-                                `
-                            }
-                          `}
-                        >
-                          {/* =================================================
-                              DROPDOWN GLASS CARD
-                          ================================================= */}
+                              left-1/2
+
+                              -translate-x-1/2
+
+                              w-32
+                              h-32
+
+                              rounded-full
+
+                              bg-morni-accent/10
+
+                              blur-3xl
+                            "
+                          />
+
+                          {/* DROPDOWN ITEMS */}
 
                           <div
                             className="
                               relative
 
-                              w-[270px]
+                              flex
+                              flex-col
 
-                              overflow-hidden
-
-                              rounded-[18px]
-
-                              border
-                              border-white/45
-
-                              bg-white/[0.72]
-
-                              backdrop-blur-[30px]
-
-                              shadow-[0_20px_55px_rgba(0,0,0,0.22)]
-
-                              ring-1
-                              ring-black/[0.04]
-
-                              p-1.5
+                              gap-0.5
                             "
                           >
-                            {/* =================================================
-                                GLASS REFLECTION
-                            ================================================= */}
+                            {link.dropdown.map(
+                              (item) => {
+                                const Icon =
+                                  item.icon;
 
-                            <div
-                              className="
-                                pointer-events-none
+                                return (
+                                  <Link
+                                    key={item.name}
+                                    to={item.href}
+                                    onClick={closeMenus}
+                                    className="
+                                      group
 
-                                absolute
-                                inset-0
+                                      flex
+                                      items-center
 
-                                bg-gradient-to-br
+                                      gap-3
 
-                                from-white/70
+                                      rounded-xl
 
-                                via-white/30
+                                      px-3
+                                      py-2.5
 
-                                to-white/[0.08]
-                              "
-                            />
+                                      text-slate-900
 
-                            {/* =================================================
-                                TOP LIGHT
-                            ================================================= */}
+                                      transition-all
+                                      duration-300
 
-                            <div
-                              className="
-                                pointer-events-none
+                                      hover:bg-black/[0.05]
 
-                                absolute
+                                      hover:translate-x-[2px]
+                                    "
+                                  >
+                                    {/* ICON */}
 
-                                top-0
-
-                                left-8
-                                right-8
-
-                                h-px
-
-                                bg-gradient-to-r
-
-                                from-transparent
-
-                                via-white
-
-                                to-transparent
-                              "
-                            />
-
-                            {/* =================================================
-                                SOFT GREEN GLOW
-                            ================================================= */}
-
-                            <div
-                              className="
-                                pointer-events-none
-
-                                absolute
-
-                                -top-16
-
-                                left-1/2
-
-                                -translate-x-1/2
-
-                                w-32
-                                h-32
-
-                                rounded-full
-
-                                bg-morni-accent/10
-
-                                blur-3xl
-                              "
-                            />
-
-                            {/* =================================================
-                                DROPDOWN ITEMS
-                            ================================================= */}
-
-                            <div
-                              className="
-                                relative
-
-                                flex
-                                flex-col
-
-                                gap-0.5
-                              "
-                            >
-                              {link.dropdown.map(
-                                (
-                                  item
-                                ) => {
-                                  const Icon =
-                                    item.icon;
-
-                                  return (
-                                    <a
-                                      key={
-                                        item.name
-                                      }
-
-                                      href={
-                                        item.href
-                                      }
-
-                                      onClick={(
-                                        event
-                                      ) =>
-                                        handleNavClick(
-                                          event,
-                                          item.href
-                                        )
-                                      }
-
+                                    <div
                                       className="
-                                        group
-
                                         flex
+
+                                        h-8
+                                        w-8
+
+                                        shrink-0
+
                                         items-center
+                                        justify-center
 
-                                        gap-3
+                                        rounded-lg
 
-                                        rounded-xl
+                                        bg-white/55
 
-                                        px-3
-                                        py-2.5
+                                        border
+                                        border-white/60
 
-                                        text-slate-900
+                                        shadow-[0_3px_12px_rgba(0,0,0,0.05)]
 
                                         transition-all
                                         duration-300
-                                        ease-out
 
-                                        hover:bg-black/[0.05]
+                                        group-hover:bg-morni-accent/15
 
-                                        hover:translate-x-[2px]
+                                        group-hover:border-morni-accent/30
+
+                                        group-hover:scale-105
                                       "
                                     >
-                                      {/* ICON */}
-
-                                      <div
+                                      <Icon
                                         className="
-                                          flex
+                                          w-4
+                                          h-4
 
-                                          h-8
-                                          w-8
+                                          text-slate-700
 
-                                          shrink-0
-
-                                          items-center
-                                          justify-center
-
-                                          rounded-lg
-
-                                          bg-white/55
-
-                                          border
-                                          border-white/60
-
-                                          shadow-[0_3px_12px_rgba(0,0,0,0.05)]
-
-                                          transition-all
+                                          transition-colors
                                           duration-300
-                                          ease-out
 
-                                          group-hover:bg-morni-accent/15
-
-                                          group-hover:border-morni-accent/30
-
-                                          group-hover:scale-105
+                                          group-hover:text-morni-primary
                                         "
-                                      >
-                                        <Icon
-                                          className="
-                                            w-4
-                                            h-4
+                                        strokeWidth={1.8}
+                                      />
+                                    </div>
 
-                                            text-slate-700
+                                    {/* TEXT */}
 
-                                            transition-colors
-                                            duration-300
-
-                                            group-hover:text-morni-primary
-                                          "
-
-                                          strokeWidth={
-                                            1.8
-                                          }
-                                        />
-                                      </div>
-
-                                      {/* TEXT */}
-
-                                      <div
+                                    <div
+                                      className="
+                                        min-w-0
+                                        flex-1
+                                      "
+                                    >
+                                      <span
                                         className="
-                                          min-w-0
+                                          block
 
-                                          flex-1
+                                          text-[13px]
+
+                                          font-semibold
+
+                                          leading-tight
+
+                                          tracking-wide
+
+                                          text-slate-900
+
+                                          transition-colors
+                                          duration-300
+
+                                          group-hover:text-morni-primary
                                         "
                                       >
-                                        <span
-                                          className="
-                                            block
+                                        {item.name}
+                                      </span>
 
-                                            text-[13px]
+                                      <span
+                                        className="
+                                          block
 
-                                            font-semibold
+                                          mt-[3px]
 
-                                            leading-tight
+                                          text-[10px]
 
-                                            tracking-wide
+                                          leading-tight
 
-                                            text-slate-900
-
-                                            transition-colors
-                                            duration-300
-
-                                            group-hover:text-morni-primary
-                                          "
-                                        >
-                                          {
-                                            item.name
-                                          }
-                                        </span>
-
-                                        <span
-                                          className="
-                                            block
-
-                                            mt-[3px]
-
-                                            text-[10px]
-
-                                            leading-tight
-
-                                            text-slate-500
-
-                                            transition-colors
-                                            duration-300
-                                          "
-                                        >
-                                          {
-                                            item.description
-                                          }
-                                        </span>
-                                      </div>
-                                    </a>
-                                  );
-                                }
-                              )}
-                            </div>
+                                          text-slate-500
+                                        "
+                                      >
+                                        {item.description}
+                                      </span>
+                                    </div>
+                                  </Link>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
-                      )}
-                    </div>
-                  );
-                }
-              )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
             {/* =================================================
@@ -1054,15 +880,11 @@ export default function Navbar({
 
               <button
                 type="button"
-
-                onClick={() =>
-                  setDarkMode(
-                    !darkMode
-                  )
+                onClick={() =>{
+                  setDarkMode(!darkMode)
+                  console.log("Dark mode toggled:", !darkMode)}
                 }
-
                 aria-label="Toggle dark mode"
-
                 className="
                   p-2.5
 
@@ -1112,26 +934,16 @@ export default function Navbar({
 
               {/* PLAN YOUR VISIT */}
 
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
+                onClick={(event) => {
+                  closeMenus();
 
-                onClick={(
-                  event
-                ) => {
-                  if (
-                    onOpenPlanner
-                  ) {
+                  if (onOpenPlanner) {
                     event.preventDefault();
-
                     onOpenPlanner();
-                  } else {
-                    handleNavClick(
-                      event,
-                      "#contact"
-                    );
                   }
                 }}
-
                 className="
                   inline-flex
 
@@ -1190,10 +1002,8 @@ export default function Navbar({
                   "
                 />
 
-                <span>
-                  Plan Your Visit
-                </span>
-              </a>
+                <span>Plan Your Visit</span>
+              </Link>
             </div>
 
             {/* =================================================
@@ -1214,15 +1024,13 @@ export default function Navbar({
 
               <button
                 type="button"
+                onClick={() =>{
+                  // setDarkMode(!darkMode)
+                  console.log("Dark mode toggled:", typeof(setDarkMode))}
+                
 
-                onClick={() =>
-                  setDarkMode(
-                    !darkMode
-                  )
                 }
-
                 aria-label="Toggle dark mode"
-
                 className="
                   p-2
 
@@ -1268,19 +1076,13 @@ export default function Navbar({
 
               <button
                 type="button"
-
                 onClick={() =>
                   setMobileMenuOpen(
                     !mobileMenuOpen
                   )
                 }
-
                 aria-label="Open menu"
-
-                aria-expanded={
-                  mobileMenuOpen
-                }
-
+                aria-expanded={mobileMenuOpen}
                 className="
                   p-2.5
 
@@ -1374,35 +1176,76 @@ export default function Navbar({
                 gap-1
               "
             >
-              {NAV_LINKS.map(
-                (link) => {
-                  const hasDropdown =
-                    Boolean(
-                      link.dropdown
-                    );
+              {NAV_LINKS.map((link) => {
+                const hasDropdown = Boolean(
+                  link.dropdown
+                );
 
-                  return (
-                    <div
-                      key={link.name}
-                    >
-                      {/* NORMAL LINK */}
+                const isActive =
+                  link.href
+                    ? isActivePage(link.href)
+                    : false;
 
-                      {!hasDropdown ? (
-                        <a
-                          href={
-                            link.href
+                return (
+                  <div key={link.name}>
+                    {/* NORMAL LINK */}
+
+                    {!hasDropdown ? (
+                      <Link
+                        to={link.href}
+                        onClick={closeMenus}
+                        className={`
+                          flex
+                          items-center
+                          justify-between
+
+                          px-4
+                          py-3
+
+                          rounded-xl
+
+                          text-xs
+
+                          font-medium
+
+                          uppercase
+
+                          tracking-wider
+
+                          transition-all
+                          duration-300
+
+                          ${
+                            isActive
+                              ? `
+                                text-morni-accent
+                                bg-white/10
+                                font-bold
+                              `
+                              : `
+                                text-white/90
+                                hover:text-morni-accent
+                                hover:bg-white/10
+                              `
                           }
+                        `}
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <>
+                        {/* MOBILE EXPLORE */}
 
-                          onClick={(
-                            event
-                          ) =>
-                            handleNavClick(
-                              event,
-                              link.href
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleMobileDropdown(
+                              link.name
                             )
                           }
+                          className={`
+                            w-full
 
-                          className="
                             flex
                             items-center
                             justify-between
@@ -1420,201 +1263,141 @@ export default function Navbar({
 
                             tracking-wider
 
-                            text-white/90
-
-                            hover:text-morni-accent
-
-                            hover:bg-white/10
-
                             transition-all
                             duration-300
-                          "
-                        >
-                          {
-                            link.name
-                          }
-                        </a>
-                      ) : (
-                        <>
-                          {/* MOBILE EXPLORE */}
 
-                          <button
-                            type="button"
-
-                            onClick={() =>
-                              handleMobileDropdown(
-                                link.name
+                            ${
+                              location.pathname.startsWith(
+                                "/explore"
                               )
+                                ? `
+                                  text-morni-accent
+                                  bg-white/10
+                                  font-bold
+                                `
+                                : `
+                                  text-white/90
+                                  hover:text-morni-accent
+                                  hover:bg-white/10
+                                `
                             }
+                          `}
+                        >
+                          <span>{link.name}</span>
 
-                            className="
-                              w-full
-
-                              flex
-                              items-center
-                              justify-between
-
-                              px-4
-                              py-3
-
-                              rounded-xl
-
-                              text-xs
-
-                              font-medium
-
-                              uppercase
-
-                              tracking-wider
-
-                              text-white/90
-
-                              hover:text-morni-accent
-
-                              hover:bg-white/10
-
-                              transition-all
-                              duration-300
-                            "
-                          >
-                            <span>
-                              {
-                                link.name
-                              }
-                            </span>
-
-                            <ChevronDown
-                              className={`
-                                w-4
-                                h-4
-
-                                transition-transform
-                                duration-300
-
-                                ${
-                                  mobileDropdown ===
-                                  link.name
-                                    ? "rotate-180"
-                                    : ""
-                                }
-                              `}
-                            />
-                          </button>
-
-                          {/* MOBILE SUBMENU */}
-
-                          <div
+                          <ChevronDown
                             className={`
-                              overflow-hidden
+                              w-4
+                              h-4
 
-                              transition-all
+                              transition-transform
                               duration-300
-                              ease-out
 
                               ${
                                 mobileDropdown ===
                                 link.name
-                                  ? `
-                                    max-h-[500px]
-                                    opacity-100
-                                  `
-                                  : `
-                                    max-h-0
-                                    opacity-0
-                                  `
+                                  ? "rotate-180"
+                                  : ""
                               }
                             `}
+                          />
+                        </button>
+
+                        {/* MOBILE SUBMENU */}
+
+                        <div
+                          className={`
+                            overflow-hidden
+
+                            transition-all
+                            duration-300
+                            ease-out
+
+                            ${
+                              mobileDropdown ===
+                              link.name
+                                ? `
+                                  max-h-[500px]
+                                  opacity-100
+                                `
+                                : `
+                                  max-h-0
+                                  opacity-0
+                                `
+                            }
+                          `}
+                        >
+                          <div
+                            className="
+                              ml-4
+
+                              mt-1
+
+                              pl-3
+
+                              border-l
+                              border-morni-accent/30
+
+                              flex
+                              flex-col
+
+                              gap-0.5
+                            "
                           >
-                            <div
-                              className="
-                                ml-4
+                            {link.dropdown.map(
+                              (item) => {
+                                const Icon =
+                                  item.icon;
 
-                                mt-1
+                                return (
+                                  <Link
+                                    key={item.name}
+                                    to={item.href}
+                                    onClick={closeMenus}
+                                    className="
+                                      flex
+                                      items-center
 
-                                pl-3
+                                      gap-3
 
-                                border-l
-                                border-morni-accent/30
+                                      px-3
+                                      py-2.5
 
-                                flex
-                                flex-col
+                                      rounded-lg
 
-                                gap-0.5
-                              "
-                            >
-                              {link.dropdown.map(
-                                (
-                                  item
-                                ) => {
-                                  const Icon =
-                                    item.icon;
+                                      text-white/70
 
-                                  return (
-                                    <a
-                                      key={
-                                        item.name
-                                      }
+                                      hover:text-white
 
-                                      href={
-                                        item.href
-                                      }
+                                      hover:bg-white/10
 
-                                      onClick={(
-                                        event
-                                      ) =>
-                                        handleNavClick(
-                                          event,
-                                          item.href
-                                        )
-                                      }
-
+                                      transition-all
+                                      duration-300
+                                    "
+                                  >
+                                    <Icon
                                       className="
-                                        flex
-                                        items-center
+                                        w-4
+                                        h-4
 
-                                        gap-3
-
-                                        px-3
-                                        py-2.5
-
-                                        rounded-lg
-
-                                        text-white/70
-
-                                        hover:text-white
-
-                                        hover:bg-white/10
-
-                                        transition-all
-                                        duration-300
+                                        text-morni-accent
                                       "
-                                    >
-                                      <Icon
-                                        className="
-                                          w-4
-                                          h-4
+                                    />
 
-                                          text-morni-accent
-                                        "
-                                      />
-
-                                      <span>
-                                        {
-                                          item.name
-                                        }
-                                      </span>
-                                    </a>
-                                  );
-                                }
-                              )}
-                            </div>
+                                    <span>
+                                      {item.name}
+                                    </span>
+                                  </Link>
+                                );
+                              }
+                            )}
                           </div>
-                        </>
-                      )}
-                    </div>
-                  );
-                }
-              )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* =================================================
@@ -1630,30 +1413,16 @@ export default function Navbar({
                 border-white/10
               "
             >
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
+                onClick={(event) => {
+                  closeMenus();
 
-                onClick={(
-                  event
-                ) => {
-                  if (
-                    onOpenPlanner
-                  ) {
+                  if (onOpenPlanner) {
                     event.preventDefault();
-
-                    setMobileMenuOpen(
-                      false
-                    );
-
                     onOpenPlanner();
-                  } else {
-                    handleNavClick(
-                      event,
-                      "#contact"
-                    );
                   }
                 }}
-
                 className="
                   w-full
 
@@ -1696,10 +1465,8 @@ export default function Navbar({
                   "
                 />
 
-                <span>
-                  Plan Your Visit
-                </span>
-              </a>
+                <span>Plan Your Visit</span>
+              </Link>
             </div>
           </div>
         </div>

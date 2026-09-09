@@ -392,22 +392,22 @@ export default function Contact({ prefilledStay }) {
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white dark:bg-morni-dark-card border border-morni-dark/10 dark:border-white/10 shadow-sm flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-morni-primary/10 dark:bg-morni-secondary/20 text-morni-primary dark:text-morni-secondary flex items-center justify-center flex-shrink-0">
+              {/* <div className="p-5 rounded-2xl bg-white dark:bg-morni-dark-card border border-morni-dark/10 dark:border-white/10 shadow-sm flex items-start gap-4"> */}
+                {/* <div className="w-10 h-10 rounded-xl bg-morni-primary/10 dark:bg-morni-secondary/20 text-morni-primary dark:text-morni-secondary flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-morni-dark/50 dark:text-morni-light/50">
+                </div> */}
+                {/* <div> */}
+                  {/* <div className="text-xs font-semibold uppercase tracking-wider text-morni-dark/50 dark:text-morni-light/50">
                     Inquiry Helpline
-                  </div>
-                  <div className="text-sm font-medium text-morni-dark/90 dark:text-white mt-0.5">
+                  </div> */}
+                  {/* <div className="text-sm font-medium text-morni-dark/90 dark:text-white mt-0.5">
                     {contactInfo.phone}
-                  </div>
-                  <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-semibold">
+                  </div> */}
+                  {/* <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-semibold">
                     Emergency Helpline: {contactInfo.emergency}
-                  </div>
-                </div>
-              </div>
+                  </div> */}
+                {/* </div> */}
+              {/* </div> */}
             </div>
 
             {/* Quick FAQs Accordion */}
