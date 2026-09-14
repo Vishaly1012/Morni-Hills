@@ -22,9 +22,18 @@ function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("morni-theme");
 
-    // If dark is saved -> true
-    // Otherwise -> false
-    return savedTheme === "dark";
+    // If theme is saved as dark
+    if (savedTheme === "dark") {
+      return true;
+    }
+
+    // If theme is saved as light
+    if (savedTheme === "light") {
+      return false;
+    }
+
+    // Default theme
+    return true;
   });
 
   // --------------------------------
@@ -45,62 +54,78 @@ function App() {
   return (
     <BrowserRouter>
       {/* =========================
-          NAVBAR
+          MAIN APPLICATION
       ========================= */}
-      <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-      />
-
-      {/* =========================
-          ROUTES
-      ========================= */}
-      <Routes>
-        {/* Home */}
-        <Route path="/" element={<Home />} />
-
-        {/* Main Pages */}
-        <Route path="/about" element={<About />} />
-
-        <Route path="/explore" element={<Explore />} />
-
-        <Route
-          path="/experience"
-          element={<ExperiencePage />}
+      <div
+        className={`
+          min-h-screen
+          transition-colors
+          duration-300
+          ${
+            darkMode
+              ? "bg-morni-dark text-white"
+              : "bg-morni-light text-gray-900"
+          }
+        `}
+      >
+        {/* =========================
+            NAVBAR
+        ========================= */}
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
 
-        <Route
-          path="/stay"
-          element={<StayPage />}
-        />
+        {/* =========================
+            ROUTES
+        ========================= */}
+        <Routes>
+          {/* Home */}
+          <Route path="/" element={<Home />} />
 
-        <Route
-          path="/eat"
-          element={<EatPage />}
-        />
+          {/* Main Pages */}
+          <Route path="/about" element={<About />} />
 
-        <Route
-          path="/gallery"
-          element={<GalleryPage />}
-        />
+          <Route path="/explore" element={<Explore />} />
 
-        <Route
-          path="/contact"
-          element={<ContactPage />}
-        />
+          <Route
+            path="/experience"
+            element={<ExperiencePage />}
+          />
 
-        {/* Tikkar Taal */}
-        <Route
-          path="/explore/tikkar-taal"
-          element={<TikkarTaal />}
-        />
+          <Route
+            path="/stay"
+            element={<StayPage />}
+          />
 
-        {/* Nearby Dynamic Pages */}
-        <Route
-          path="/nearby/:slug"
-          element={<NearbyDestinationPage />}
-        />
-      </Routes>
+          <Route
+            path="/eat"
+            element={<EatPage />}
+          />
+
+          <Route
+            path="/gallery"
+            element={<GalleryPage />}
+          />
+
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
+
+          {/* Tikkar Taal */}
+          <Route
+            path="/explore/tikkar-taal"
+            element={<TikkarTaal />}
+          />
+
+          {/* Nearby Dynamic Pages */}
+          <Route
+            path="/nearby/:slug"
+            element={<NearbyDestinationPage />}
+          />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

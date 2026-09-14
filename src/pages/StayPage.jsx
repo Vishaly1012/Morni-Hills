@@ -1,5 +1,6 @@
 
 import React from "react";
+
 import {
   BedDouble,
   Wifi,
@@ -9,6 +10,7 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
+
 import ScrollReveal from "../components/ScrollReveal";
 
 const stays = [
@@ -21,6 +23,7 @@ const stays = [
     description:
       "A peaceful hillside stay surrounded by greenery and beautiful mountain views.",
   },
+
   {
     name: "Forest Cottage",
     type: "Nature Stay",
@@ -30,6 +33,7 @@ const stays = [
     description:
       "Relax in a cozy cottage surrounded by forests and the quiet beauty of Morni.",
   },
+
   {
     name: "Lake View Retreat",
     type: "Premium Stay",
@@ -47,16 +51,19 @@ const facilities = [
     title: "Free Wi-Fi",
     text: "Stay connected whenever you need.",
   },
+
   {
     icon: Utensils,
     title: "Restaurant",
     text: "Enjoy fresh and delicious local meals.",
   },
+
   {
     icon: Car,
     title: "Parking",
     text: "Convenient parking for your vehicle.",
   },
+
   {
     icon: Trees,
     title: "Nature Views",
@@ -66,10 +73,14 @@ const facilities = [
 
 function StayPage() {
   return (
-    <main className="bg-white text-slate-800">
+    <main className="bg-white text-slate-800 transition-colors duration-300 dark:bg-morni-dark dark:text-white">
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
+
       <section className="relative min-h-[72vh] flex items-center overflow-hidden">
+
         <img
           src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=2000&q=85"
           alt="Stay in Morni Hills"
@@ -79,201 +90,421 @@ function StayPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-10">
+
           <ScrollReveal>
+
             <div className="max-w-3xl text-white">
 
+              {/* Badge */}
+
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-sm">
+
                 <BedDouble size={16} />
+
                 Stay in Morni
+
               </span>
 
+              {/* Heading */}
+
               <h1 className="font-serif text-5xl md:text-7xl leading-tight mt-6">
+
                 Stay Close
+
                 <span className="block text-emerald-300">
                   To Nature
                 </span>
+
               </h1>
 
+              {/* Description */}
+
               <p className="mt-6 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed">
+
                 From comfortable resorts to peaceful cottages, discover
                 beautiful places to stay while exploring Morni Hills.
+
               </p>
+
+              {/* Button */}
 
               <a
                 href="#stays"
-                className="inline-flex items-center gap-3 mt-8 px-7 py-3.5 rounded-full bg-white text-slate-900 font-semibold hover:bg-emerald-50 transition"
+                className="inline-flex items-center gap-3 mt-8 px-7 py-3.5 rounded-full bg-white text-slate-900 font-semibold hover:bg-emerald-50 dark:hover:bg-emerald-100 transition"
               >
+
                 Explore Stays
+
                 <ArrowRight size={18} />
+
               </a>
 
             </div>
+
           </ScrollReveal>
+
         </div>
+
       </section>
 
-      {/* INTRO */}
-      <section className="py-20 md:py-28">
+
+      {/* =====================================================
+          INTRO
+      ===================================================== */}
+
+      <section className="py-20 md:py-28 bg-white dark:bg-morni-dark transition-colors duration-300">
+
         <div className="max-w-4xl mx-auto px-6 text-center">
 
           <ScrollReveal>
-            <span className="text-emerald-600 font-semibold uppercase tracking-[0.2em] text-sm">
+
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-[0.2em] text-sm">
+
               Where To Stay
+
             </span>
 
-            <h2 className="font-serif text-4xl md:text-5xl text-slate-900 mt-4">
+            <h2 className="font-serif text-4xl md:text-5xl text-slate-900 dark:text-white mt-4 transition-colors duration-300">
+
               Wake Up To The Hills
+
             </h2>
 
-            <p className="mt-6 text-lg text-slate-600 leading-8">
+            <p className="mt-6 text-lg text-slate-600 dark:text-white/65 leading-8 transition-colors duration-300">
+
               Make your Morni Hills trip more memorable by staying close to
               nature. Choose a peaceful cottage, a comfortable resort or a
               scenic retreat for your getaway.
+
             </p>
+
           </ScrollReveal>
 
         </div>
+
       </section>
 
-      {/* STAYS */}
-      <section id="stays" className="bg-slate-50 py-20 md:py-28">
+
+      {/* =====================================================
+          STAYS
+      ===================================================== */}
+
+      <section
+        id="stays"
+        className="bg-slate-50 dark:bg-white/[0.03] py-20 md:py-28 transition-colors duration-300"
+      >
+
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
           <ScrollReveal>
+
             <div className="mb-12">
-              <span className="text-emerald-600 font-semibold uppercase tracking-[0.2em] text-sm">
+
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-[0.2em] text-sm">
+
                 Accommodation
+
               </span>
 
-              <h2 className="font-serif text-4xl md:text-5xl text-slate-900 mt-3">
+              <h2 className="font-serif text-4xl md:text-5xl text-slate-900 dark:text-white mt-3 transition-colors duration-300">
+
                 Find Your Perfect Stay
+
               </h2>
+
             </div>
+
           </ScrollReveal>
+
+
+          {/* STAY CARDS */}
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             {stays.map((stay) => (
+
               <ScrollReveal key={stay.name}>
-                <article className="group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-300">
+
+                <article
+                  className="
+                    group
+                    bg-white
+                    dark:bg-white/[0.05]
+                    rounded-3xl
+                    overflow-hidden
+                    border
+                    border-slate-200
+                    dark:border-white/10
+                    hover:shadow-2xl
+                    dark:hover:shadow-black/30
+                    transition-all
+                    duration-300
+                  "
+                >
+
+                  {/* Image */}
 
                   <div className="relative h-64 overflow-hidden">
+
                     <img
                       src={stay.image}
                       alt={stay.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                     />
 
-                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-xs font-semibold text-slate-700">
+                    {/* Type */}
+
+                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur text-xs font-semibold text-slate-700 dark:text-white">
+
                       {stay.type}
+
                     </div>
 
-                    <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-white/95 text-slate-900 text-sm font-semibold">
+                    {/* Price */}
+
+                    <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-white/95 dark:bg-black/70 backdrop-blur text-slate-900 dark:text-white text-sm font-semibold">
+
                       {stay.price}
-                      <span className="text-xs text-slate-500">
+
+                      <span className="text-xs text-slate-500 dark:text-white/60">
                         {" "} / night
                       </span>
+
                     </div>
+
                   </div>
+
+
+                  {/* Card Content */}
 
                   <div className="p-6">
 
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-2xl font-semibold text-slate-900">
+
+                      <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
+
                         {stay.name}
+
                       </h3>
 
-                      <div className="flex items-center gap-1 text-sm">
+
+                      {/* Rating */}
+
+                      <div className="flex items-center gap-1 text-sm text-slate-700 dark:text-white">
+
                         <Star
                           size={15}
                           className="fill-current text-amber-400"
                         />
-                        <span className="font-medium">4.8</span>
+
+                        <span className="font-medium">
+                          4.8
+                        </span>
+
                       </div>
+
                     </div>
 
-                    <p className="mt-3 text-slate-600 leading-7">
+
+                    {/* Description */}
+
+                    <p className="mt-3 text-slate-600 dark:text-white/60 leading-7">
+
                       {stay.description}
+
                     </p>
 
-                    <button className="mt-6 w-full flex items-center justify-center gap-2 rounded-full bg-slate-900 text-white py-3.5 font-semibold hover:bg-emerald-600 transition">
+
+                    {/* Button */}
+
+                    <button
+                      className="
+                        mt-6
+                        w-full
+                        flex
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-full
+                        bg-slate-900
+                        dark:bg-white
+                        text-white
+                        dark:text-slate-900
+                        py-3.5
+                        font-semibold
+                        hover:bg-emerald-600
+                        dark:hover:bg-emerald-500
+                        dark:hover:text-white
+                        transition
+                      "
+                    >
+
                       View Stay
+
                       <ArrowRight size={17} />
+
                     </button>
 
                   </div>
+
                 </article>
+
               </ScrollReveal>
+
             ))}
 
           </div>
+
         </div>
+
       </section>
 
-      {/* FACILITIES */}
-      <section className="py-20 md:py-28">
+
+      {/* =====================================================
+          FACILITIES
+      ===================================================== */}
+
+      <section className="py-20 md:py-28 bg-white dark:bg-morni-dark transition-colors duration-300">
+
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-14 items-center">
 
+
+            {/* LEFT CONTENT */}
+
             <ScrollReveal>
+
               <div>
 
-                <span className="text-emerald-600 font-semibold uppercase tracking-[0.2em] text-sm">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-[0.2em] text-sm">
+
                   Comfortable & Convenient
+
                 </span>
 
-                <h2 className="font-serif text-4xl md:text-5xl text-slate-900 mt-4 leading-tight">
+
+                <h2 className="font-serif text-4xl md:text-5xl text-slate-900 dark:text-white mt-4 leading-tight">
+
                   Everything You Need
-                  <span className="block text-emerald-600">
+
+                  <span className="block text-emerald-600 dark:text-emerald-400">
+
                     For A Relaxing Stay
+
                   </span>
+
                 </h2>
 
-                <p className="mt-6 text-slate-600 text-lg leading-8">
+
+                <p className="mt-6 text-slate-600 dark:text-white/65 text-lg leading-8">
+
                   Whether you're visiting for adventure or simply looking for
                   a peaceful escape, Morni offers stays designed around
                   comfort and nature.
+
                 </p>
 
               </div>
+
             </ScrollReveal>
+
+
+            {/* FACILITY CARDS */}
 
             <div className="grid sm:grid-cols-2 gap-5">
 
               {facilities.map((facility) => {
+
                 const Icon = facility.icon;
 
                 return (
-                  <ScrollReveal key={facility.title}>
-                    <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 hover:bg-emerald-50 hover:border-emerald-100 transition">
 
-                      <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-emerald-600 shadow-sm">
+                  <ScrollReveal key={facility.title}>
+
+                    <div
+                      className="
+                        p-6
+                        rounded-3xl
+                        bg-slate-50
+                        dark:bg-white/[0.05]
+                        border
+                        border-slate-200
+                        dark:border-white/10
+                        hover:bg-emerald-50
+                        dark:hover:bg-emerald-500/10
+                        hover:border-emerald-100
+                        dark:hover:border-emerald-500/20
+                        transition
+                      "
+                    >
+
+                      {/* Icon */}
+
+                      <div
+                        className="
+                          w-12
+                          h-12
+                          rounded-2xl
+                          bg-white
+                          dark:bg-white/10
+                          flex
+                          items-center
+                          justify-center
+                          text-emerald-600
+                          dark:text-emerald-400
+                          shadow-sm
+                        "
+                      >
+
                         <Icon size={22} />
+
                       </div>
 
-                      <h3 className="text-lg font-semibold text-slate-900 mt-5">
+
+                      {/* Title */}
+
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-white mt-5">
+
                         {facility.title}
+
                       </h3>
 
-                      <p className="text-sm text-slate-500 mt-2 leading-6">
+
+                      {/* Description */}
+
+                      <p className="text-sm text-slate-500 dark:text-white/50 mt-2 leading-6">
+
                         {facility.text}
+
                       </p>
 
                     </div>
+
                   </ScrollReveal>
+
                 );
+
               })}
 
             </div>
 
           </div>
+
         </div>
+
       </section>
 
-      {/* CTA */}
-      <section className="px-6 pb-24">
+
+      {/* =====================================================
+          CTA
+      ===================================================== */}
+
+      <section className="px-6 pb-24 bg-white dark:bg-morni-dark transition-colors duration-300">
+
         <div className="relative max-w-7xl mx-auto overflow-hidden rounded-[2rem]">
+
+          {/* Background Image */}
 
           <img
             src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1800&q=85"
@@ -281,33 +512,64 @@ function StayPage() {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
+
+          {/* Overlay */}
+
           <div className="absolute inset-0 bg-black/50" />
+
+
+          {/* Content */}
 
           <div className="relative z-10 py-20 px-6 text-center text-white">
 
             <ScrollReveal>
 
               <h2 className="font-serif text-4xl md:text-5xl">
+
                 Make Morni Your Next Escape
+
               </h2>
 
+
               <p className="max-w-2xl mx-auto mt-5 text-white/80 text-lg">
+
                 Find a peaceful place to stay and experience the hills at
                 your own pace.
+
               </p>
+
 
               <a
                 href="/experience"
-                className="inline-flex items-center gap-2 mt-8 px-7 py-3.5 rounded-full bg-white text-slate-900 font-semibold hover:bg-emerald-50 transition"
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  mt-8
+                  px-7
+                  py-3.5
+                  rounded-full
+                  bg-white
+                  text-slate-900
+                  font-semibold
+                  hover:bg-emerald-50
+                  dark:hover:bg-emerald-100
+                  transition
+                "
               >
+
                 Explore Experiences
+
                 <ArrowRight size={18} />
+
               </a>
 
             </ScrollReveal>
 
           </div>
+
         </div>
+
       </section>
 
     </main>
@@ -315,4 +577,3 @@ function StayPage() {
 }
 
 export default StayPage;
-

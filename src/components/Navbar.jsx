@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Mountain, Menu, X, Sun, Moon,Calendar, Hotel, ChevronDown,Castle, Waves,MapPin,} from "lucide-react";
+import {
+  Mountain,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Calendar,
+  Hotel,
+  ChevronDown,
+  Castle,
+  Waves,
+  MapPin,
+} from "lucide-react";
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 const NAV_LINKS = [
-  { name: "Home", href: "/", },
+  { name: "Home", href: "/" },
 
-  { name: "About",href: "/about",},
+  { name: "About", href: "/about" },
 
   {
     name: "Explore",
@@ -65,13 +77,10 @@ const NAV_LINKS = [
    NAVBAR COMPONENT
 ========================================================= */
 
-export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,}) 
-{
+export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
   const location = useLocation();
 
-  console.log("Dark mode toggled:", darkMode, setDarkMode)
-
-  
+  // console.log("Dark mode toggled:", darkMode, setDarkMode)
 
   /* =======================================================
      STATE
@@ -88,7 +97,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
   /* =======================================================
      SCROLL DETECTION
   ======================================================= */
-   console.log("Dark mode toggled:", typeof(setDarkMode))
+  console.log("Dark mode toggled:", typeof setDarkMode);
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
@@ -145,9 +154,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
   ======================================================= */
 
   const handleMobileDropdown = (name) => {
-    setMobileDropdown(
-      mobileDropdown === name ? null : name
-    );
+    setMobileDropdown(mobileDropdown === name ? null : name);
   };
 
   /* =======================================================
@@ -322,7 +329,6 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                   "
                 >
                   MORNI
-
                   <span
                     className="
                       text-morni-accent
@@ -379,13 +385,9 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
               "
             >
               {NAV_LINKS.map((link) => {
-                const hasDropdown = Boolean(
-                  link.dropdown
-                );
+                const hasDropdown = Boolean(link.dropdown);
 
-                const isActive = link.href
-                  ? isActivePage(link.href)
-                  : false;
+                const isActive = link.href ? isActivePage(link.href) : false;
 
                 return (
                   <div
@@ -393,11 +395,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                     className={`
                       relative
 
-                      ${
-                        hasDropdown
-                          ? "explore-dropdown"
-                          : ""
-                      }
+                      ${hasDropdown ? "explore-dropdown" : ""}
                     `}
                     onMouseEnter={() => {
                       if (hasDropdown) {
@@ -485,9 +483,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                       <button
                         type="button"
-                        aria-expanded={
-                          openDropdown === link.name
-                        }
+                        aria-expanded={openDropdown === link.name}
                         className={`
                           relative
 
@@ -516,9 +512,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                           cursor-default
 
                           ${
-                            location.pathname.startsWith(
-                              "/explore"
-                            )
+                            location.pathname.startsWith("/explore")
                               ? `
                                 text-morni-accent
                                 font-bold
@@ -540,18 +534,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                             transition-transform
                             duration-300
 
-                            ${
-                              openDropdown ===
-                              link.name
-                                ? "rotate-180"
-                                : ""
-                            }
+                            ${openDropdown === link.name ? "rotate-180" : ""}
                           `}
                         />
 
-                        {location.pathname.startsWith(
-                          "/explore"
-                        ) && (
+                        {location.pathname.startsWith("/explore") && (
                           <span
                             className="
                               absolute
@@ -720,17 +707,15 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                               gap-0.5
                             "
                           >
-                            {link.dropdown.map(
-                              (item) => {
-                                const Icon =
-                                  item.icon;
+                            {link.dropdown.map((item) => {
+                              const Icon = item.icon;
 
-                                return (
-                                  <Link
-                                    key={item.name}
-                                    to={item.href}
-                                    onClick={closeMenus}
-                                    className="
+                              return (
+                                <Link
+                                  key={item.name}
+                                  to={item.href}
+                                  onClick={closeMenus}
+                                  className="
                                       group
 
                                       flex
@@ -752,11 +737,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                                       hover:translate-x-[2px]
                                     "
-                                  >
-                                    {/* ICON */}
+                                >
+                                  {/* ICON */}
 
-                                    <div
-                                      className="
+                                  <div
+                                    className="
                                         flex
 
                                         h-8
@@ -785,9 +770,9 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                                         group-hover:scale-105
                                       "
-                                    >
-                                      <Icon
-                                        className="
+                                  >
+                                    <Icon
+                                      className="
                                           w-4
                                           h-4
 
@@ -798,20 +783,20 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                                           group-hover:text-morni-primary
                                         "
-                                        strokeWidth={1.8}
-                                      />
-                                    </div>
+                                      strokeWidth={1.8}
+                                    />
+                                  </div>
 
-                                    {/* TEXT */}
+                                  {/* TEXT */}
 
-                                    <div
-                                      className="
+                                  <div
+                                    className="
                                         min-w-0
                                         flex-1
                                       "
-                                    >
-                                      <span
-                                        className="
+                                  >
+                                    <span
+                                      className="
                                           block
 
                                           text-[13px]
@@ -829,12 +814,12 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                                           group-hover:text-morni-primary
                                         "
-                                      >
-                                        {item.name}
-                                      </span>
+                                    >
+                                      {item.name}
+                                    </span>
 
-                                      <span
-                                        className="
+                                    <span
+                                      className="
                                           block
 
                                           mt-[3px]
@@ -845,14 +830,13 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                                           text-slate-500
                                         "
-                                      >
-                                        {item.description}
-                                      </span>
-                                    </div>
-                                  </Link>
-                                );
-                              }
-                            )}
+                                    >
+                                      {item.description}
+                                    </span>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -880,10 +864,10 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
               <button
                 type="button"
-                onClick={() =>{
-                  setDarkMode(!darkMode)
-                  console.log("Dark mode toggled:", !darkMode)}
-                }
+                onClick={() => {
+                  setDarkMode(!darkMode);
+                  console.log("Dark mode toggled:", !darkMode);
+                }}
                 aria-label="Toggle dark mode"
                 className="
                   p-2.5
@@ -938,26 +922,12 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                 to="/contact"
                 onClick={(event) => {
                   closeMenus();
-
                   if (onOpenPlanner) {
                     event.preventDefault();
                     onOpenPlanner();
                   }
                 }}
-                className="
-                  inline-flex
-
-                  items-center
-                  justify-center
-
-                  gap-2
-
-                  px-5
-                  py-2.5
-
-                  rounded-full
-
-                  font-semibold
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-semibold
 
                   text-xs
 
@@ -1024,12 +994,9 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
               <button
                 type="button"
-                onClick={() =>{
-                  // setDarkMode(!darkMode)
-                  console.log("Dark mode toggled:", typeof(setDarkMode))}
-                
-
-                }
+                onClick={() => {
+                  setDarkMode(!darkMode);
+                }}
                 aria-label="Toggle dark mode"
                 className="
                   p-2
@@ -1076,11 +1043,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
               <button
                 type="button"
-                onClick={() =>
-                  setMobileMenuOpen(
-                    !mobileMenuOpen
-                  )
-                }
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Open menu"
                 aria-expanded={mobileMenuOpen}
                 className="
@@ -1177,14 +1140,9 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
               "
             >
               {NAV_LINKS.map((link) => {
-                const hasDropdown = Boolean(
-                  link.dropdown
-                );
+                const hasDropdown = Boolean(link.dropdown);
 
-                const isActive =
-                  link.href
-                    ? isActivePage(link.href)
-                    : false;
+                const isActive = link.href ? isActivePage(link.href) : false;
 
                 return (
                   <div key={link.name}>
@@ -1238,11 +1196,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
 
                         <button
                           type="button"
-                          onClick={() =>
-                            handleMobileDropdown(
-                              link.name
-                            )
-                          }
+                          onClick={() => handleMobileDropdown(link.name)}
                           className={`
                             w-full
 
@@ -1267,9 +1221,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                             duration-300
 
                             ${
-                              location.pathname.startsWith(
-                                "/explore"
-                              )
+                              location.pathname.startsWith("/explore")
                                 ? `
                                   text-morni-accent
                                   bg-white/10
@@ -1294,10 +1246,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                               duration-300
 
                               ${
-                                mobileDropdown ===
-                                link.name
-                                  ? "rotate-180"
-                                  : ""
+                                mobileDropdown === link.name ? "rotate-180" : ""
                               }
                             `}
                           />
@@ -1314,8 +1263,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                             ease-out
 
                             ${
-                              mobileDropdown ===
-                              link.name
+                              mobileDropdown === link.name
                                 ? `
                                   max-h-[500px]
                                   opacity-100
@@ -1327,34 +1275,16 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                             }
                           `}
                         >
-                          <div
-                            className="
-                              ml-4
+                          <div className=" ml-4 mt-1 pl-3 border-l border-morni-accent/30 flex flex-col gap-0.5">
+                            {link.dropdown.map((item) => {
+                              const Icon = item.icon;
 
-                              mt-1
-
-                              pl-3
-
-                              border-l
-                              border-morni-accent/30
-
-                              flex
-                              flex-col
-
-                              gap-0.5
-                            "
-                          >
-                            {link.dropdown.map(
-                              (item) => {
-                                const Icon =
-                                  item.icon;
-
-                                return (
-                                  <Link
-                                    key={item.name}
-                                    to={item.href}
-                                    onClick={closeMenus}
-                                    className="
+                              return (
+                                <Link
+                                  key={item.name}
+                                  to={item.href}
+                                  onClick={closeMenus}
+                                  className="
                                       flex
                                       items-center
 
@@ -1374,23 +1304,20 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner,})
                                       transition-all
                                       duration-300
                                     "
-                                  >
-                                    <Icon
-                                      className="
+                                >
+                                  <Icon
+                                    className="
                                         w-4
                                         h-4
 
                                         text-morni-accent
                                       "
-                                    />
+                                  />
 
-                                    <span>
-                                      {item.name}
-                                    </span>
-                                  </Link>
-                                );
-                              }
-                            )}
+                                  <span>{item.name}</span>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       </>
