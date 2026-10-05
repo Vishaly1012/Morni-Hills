@@ -10,12 +10,15 @@ import Explore from "./pages/ExplorePage";
 import ExperiencePage from "./pages/ExperiencePage";
 import TikkarTaal from "./pages/TikkarTaalPage";
 import StayPage from "./pages/StayPage";
+
 import EatPage from "./pages/EatPage";
 import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
-import NearbyDestinationPage from "./pages/NearbyDestinationPage";
+
 import GalleryPage from "./pages/GalleryPage";
-import AttractionDetailsPage from "./pages/AttractionDetailsPage";
 import ContactPage from "./pages/ContactPage";
+
+import AttractionDetailsPage from "./pages/AttractionDetailsPage";
+import NearbyDestinationPage from "./pages/NearbyDestinationPage";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -53,32 +56,62 @@ function App() {
           }
         `}
       >
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
 
         <Routes>
-          {/* Home */}
+
+          {/* ================= HOME ================= */}
           <Route path="/" element={<Home />} />
 
-          {/* Main Pages */}
+          {/* ================= MAIN PAGES ================= */}
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/stay" element={<StayPage />} />
-          
-          {/* Restaurants */}
-          <Route path="/eat" element={<EatPage />} />
-          <Route path="/eat/:slug" element={<RestaurantDetailsPage />} />
 
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          {/* ================= MORNI ATTRACTIONS ================= */}
+          <Route
+            path="/explore/tikkar-taal"
+            element={<TikkarTaal />}
+          />
 
-          {/* Tikkar Taal */}
-          <Route path="/explore/tikkar-taal" element={<TikkarTaal />} />
+          <Route
+            path="/explore/:slug"
+            element={<AttractionDetailsPage />}
+          />
 
-          <Route path="/explore/:slug" element={<AttractionDetailsPage />} />
+          {/* ================= NEARBY DESTINATIONS ================= */}
+          <Route
+            path="/nearby/:slug"
+            element={<NearbyDestinationPage />}
+          />
 
-          {/* Nearby */}
-          <Route path="/nearby/:slug" element={<NearbyDestinationPage />} />
+          {/* ================= EAT ================= */}
+          <Route
+            path="/eat"
+            element={<EatPage />}
+          />
+
+          <Route
+            path="/eat/:slug"
+            element={<RestaurantDetailsPage />}
+          />
+
+          {/* ================= GALLERY ================= */}
+          <Route
+            path="/gallery"
+            element={<GalleryPage />}
+          />
+
+          {/* ================= CONTACT ================= */}
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
+
         </Routes>
 
         <Footer />

@@ -1,19 +1,13 @@
-
 import React, { useState } from "react";
 import { MORNI_DATA } from "../data/morniData";
-import AttractionCard from "./AttractionCard";
 import ScrollReveal from "./ScrollReveal";
-import { Compass } from "lucide-react";
+import { Compass, ArrowUpRight, Clock, MapPin } from "lucide-react";
 import { cssData } from "./cssData.js";
 import { useNavigate } from "react-router-dom";
 
 const CATEGORIES = [
   "All",
-  "Nature & Lakes",
-  "Heritage",
-  "Viewpoints",
-  "Adventure",
-  "Activities",
+  "Nearby",
 ];
 
 export default function Attractions() {
@@ -21,24 +15,13 @@ export default function Attractions() {
 
   const navigate = useNavigate();
 
-  // Handle attraction navigation
-const handleAttractionClick = (attraction) => {
-  if (attraction.id === "tikkar-taal") {
-    navigate("/explore/tikkar-taal");
-  } else {
-    navigate(`/explore/${attraction.id}`);
-  }
-};
+  const handleAttractionClick = (place) => {
+    console.log("Opening:", place.id);
 
-  // Filter attractions by category
-  const filteredAttractions =
-    selectedCategory === "All"
-      ? MORNI_DATA.attractions
-      : MORNI_DATA.attractions.filter((item) =>
-          item.category
-            .toLowerCase()
-            .includes(selectedCategory.toLowerCase())
-        );
+    navigate(`/nearby/${place.id}`);
+  };
+
+  const filteredPlaces = MORNI_DATA.nearbyPlaces;
 
   return (
     <section
@@ -47,33 +30,37 @@ const handleAttractionClick = (attraction) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
+        {/* ================= HEADER ================= */}
+
         <ScrollReveal delay={0} distance={30}>
           <div className="text-center max-w-3xl mx-auto mb-14">
 
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-morni-primary/10 dark:bg-morni-secondary/20 text-morni-primary dark:text-morni-secondary border border-morni-primary/20 text-xs font-semibold tracking-wider uppercase mb-4">
+
               <Compass className="w-3.5 h-3.5" />
+
               <span>DISCOVER DESTINATIONS</span>
+
             </div>
 
-            {/* Heading */}
             <h2 className="heading-section mb-4">
               Explore{" "}
               <span className="italic text-morni-primary dark:text-morni-secondary">
-                Morni
+                Nearby
               </span>
             </h2>
 
-            {/* Description */}
             <p className="subheading-section">
-              Places that make the hills unforgettable. From ancient hilltop
-              fortifications to sacred twin lakes and emerald forest paths.
+              Discover beautiful destinations, heritage sites, lakes,
+              hill towns and experiences around Morni Hills.
             </p>
 
-            {/* Category Filter Pills */}
+            {/* FILTER */}
+
             <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+
               {CATEGORIES.map((cat) => (
+
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
@@ -85,27 +72,164 @@ const handleAttractionClick = (attraction) => {
                 >
                   {cat}
                 </button>
+
               ))}
+
             </div>
+
           </div>
         </ScrollReveal>
 
-        {/* Attractions Grid */}
+
+        {/* ================= GRID ================= */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredAttractions.map((attraction, idx) => (
+
+          {filteredPlaces.map((place, idx) => (
+
             <ScrollReveal
-              key={attraction.id}
+              key={place.id}
               delay={(idx % 3) * 120}
               distance={40}
               className="h-full"
             >
-              <AttractionCard
-                attraction={attraction}
-                onClick={() => handleAttractionClick(attraction)}
-              />
+
+              <div
+                onClick={() => handleAttractionClick(place)}
+                className="
+                  group
+                  relative
+                  rounded-3xl
+                  overflow-hidden
+                  glass-card
+                  transition-all
+                  duration-500
+                  hover:-translate-y-2
+                  hover:shadow-2xl
+                  hover:shadow-morni-primary/15
+                  cursor-pointer
+                  flex
+                  flex-col
+                  h-full
+                  border
+                  border-morni-dark/10
+                  dark:border-white/10
+                "
+              >
+
+                {/* IMAGE */}
+
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+
+                  <img
+                    src={place.image}
+                    alt={place.name}
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                      object-center
+                      group-hover:scale-110
+                      transition-transform
+                      duration-700
+                      ease-out
+                    "
+                    loading="lazy"
+                  />
+
+                  {/* Gradient */}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Nearby Badge */}
+
+                  <div className="absolute top-4 left-4 z-10">
+
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-black/50 backdrop-blur-md text-morni-accent border border-white/20">
+                      Nearby
+                    </span>
+
+                  </div>
+
+                  {/* Distance */}
+
+                  <div className="absolute top-4 right-4 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-[11px] font-medium text-white/90 border border-white/20">
+
+                    <MapPin className="w-3 h-3 text-morni-secondary" />
+
+                    <span>{place.distance}</span>
+
+                  </div>
+
+                  {/* Hover */}
+
+                  <div className="absolute inset-0 bg-morni-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                </div>
+
+
+                {/* CONTENT */}
+
+                <div className="p-6 flex-1 flex flex-col justify-between bg-white dark:bg-morni-dark-card transition-colors duration-300">
+
+                  <div>
+
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-morni-dark dark:text-white group-hover:text-morni-primary dark:group-hover:text-morni-secondary transition-colors mb-2">
+                      {place.name}
+                    </h3>
+
+                    <p className="text-xs font-medium text-morni-accent uppercase tracking-wider mb-3">
+                      {place.distance}
+                    </p>
+
+                    <p className="text-sm text-morni-dark/70 dark:text-morni-light/70 line-clamp-3 leading-relaxed mb-4">
+                      {place.description}
+                    </p>
+
+                  </div>
+
+
+                  {/* FOOTER */}
+
+                  <div className="pt-4 border-t border-morni-dark/10 dark:border-white/10 flex items-center justify-between">
+
+                    <div className="flex items-center gap-1.5 text-xs text-morni-dark/60 dark:text-morni-light/60">
+
+                      <Clock className="w-3.5 h-3.5 text-morni-primary dark:text-morni-secondary" />
+
+                      <span>
+                        {place.driveTime}
+                      </span>
+
+                    </div>
+
+
+                    <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-morni-primary dark:text-morni-secondary group-hover:text-morni-accent transition-colors">
+
+                      <span>
+                        View Details
+                      </span>
+
+                      <div className="w-7 h-7 rounded-full bg-morni-primary/10 dark:bg-morni-secondary/20 flex items-center justify-center group-hover:bg-morni-accent group-hover:text-morni-dark transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
             </ScrollReveal>
+
           ))}
+
         </div>
+
       </div>
     </section>
   );

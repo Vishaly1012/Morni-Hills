@@ -7,7 +7,7 @@ import TikkarTaalFeature from "../components/TikkarTaalFeature";
 import Experience from "../components/Experience";
 import Restaurants from "../components/Restaurants";
 import Resorts from "../components/Resorts";
-import NearbyPlaces from "../components/NearbyPlaces";
+// import NearbyPlaces from "../components/NearbyPlaces";
 import Gallery from "../components/Gallery";
 import VideoSection from "../components/VideoSection";
 import Contact from "../components/Contact";
@@ -490,11 +490,11 @@ export default function Home({ darkMode, setDarkMode }) {
         />
 
         {/* 8. Nearby */}
-        <NearbyPlaces
+        {/* <NearbyPlaces
           onSelectNearby={(place) =>
             handleOpenModal(place, "nearby")
-          }
-        />
+          } */}
+        {/* /> */}
 
         {/* 9. Gallery */}
         <Gallery

@@ -13,64 +13,64 @@ import ScrollReveal from "../components/ScrollReveal";
 
 const nearbyPlaces = [
   {
-    name: "Panchkula",
-    slug: "panchkula",
-    distance: "35 km",
-    type: "City",
-    image:
-      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=85",
-    description:
-      "A modern city and an ideal starting point for exploring Morni Hills and the surrounding region.",
-  },
-  {
-    name: "Chandigarh",
-    slug: "chandigarh",
-    distance: "45 km",
-    type: "City & Heritage",
-    image:
-      "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1200&q=85",
-    description:
-      "Explore the famous planned city, beautiful gardens, architecture, cafés and cultural attractions.",
-  },
-  {
-    name: "Pinjore Gardens",
-    slug: "pinjore-gardens",
-    distance: "30 km",
+    name: "Yadavindra Gardens (Pinjore)",
+    slug: "yadavindra-gardens",
+    distance: "40 km",
     type: "Heritage",
     image:
       "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85",
     description:
-      "Visit the historic Mughal-style gardens surrounded by landscaped greenery and peaceful pathways.",
+      "A historic Mughal-style terraced garden featuring beautiful fountains, pavilions, landscaped greenery and peaceful pathways.",
   },
   {
-    name: "Kasauli",
-    slug: "kasauli",
-    distance: "65 km",
-    type: "Hill Station",
-    image:
-      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=85",
-    description:
-      "A charming hill destination known for its colonial atmosphere, mountain views and peaceful streets.",
-  },
-  {
-    name: "Sukhna Lake",
+    name: "Sukhna Lake (Chandigarh)",
     slug: "sukhna-lake",
-    distance: "50 km",
+    distance: "52 km",
     type: "Nature",
     image:
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85",
     description:
-      "Relax beside the water, enjoy the surroundings and experience one of Chandigarh's popular attractions.",
+      "A peaceful waterfront destination known for boating, lakeside walks, sunrise views, bird watching and relaxing surroundings.",
   },
   {
-    name: "Mata Mansa Devi",
-    slug: "mansa-devi",
-    distance: "40 km",
+    name: "Nada Sahib Gurudwara",
+    slug: "nada-sahib",
+    distance: "33 km",
     type: "Spiritual",
     image:
-      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1609947017136-9daf32a5eb16?auto=format&fit=crop&w=1200&q=85",
     description:
-      "A well-known temple destination near Panchkula surrounded by the Shivalik foothills.",
+      "A historic Sikh pilgrimage destination near the Ghaggar River, known for its peaceful atmosphere and distinctive architecture.",
+  },
+  {
+    name: "Timber Trail Cable Car (Parwanoo)",
+    slug: "timber-trail",
+    distance: "40 km",
+    type: "Adventure",
+    image:
+      "https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Enjoy an exciting cable car experience with panoramic views of the forested Shivalik landscape and surrounding valleys.",
+  },
+  {
+    name: "Kasauli Hill Town",
+    slug: "kasauli",
+    distance: "52 km",
+    type: "Hill Station",
+    image:
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "A charming hill town surrounded by pine forests, colonial-era architecture, peaceful streets and beautiful mountain views.",
+  },
+  {
+    name: "National Cactus Garden (Panchkula)",
+    slug: "national-cactus-garden",
+    distance: "33 km",
+    type: "Nature",
+    image:
+      "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "A unique botanical destination featuring cactus and succulent collections, landscaped areas and interesting photography spots.",
   },
 ];
 
