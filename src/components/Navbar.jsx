@@ -97,7 +97,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
   /* =======================================================
      SCROLL DETECTION
   ======================================================= */
-  console.log("Dark mode toggled:", typeof setDarkMode);
+  // console.log("Dark mode toggled:", typeof setDarkMode);
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
@@ -918,7 +918,7 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
 
               {/* PLAN YOUR VISIT */}
 
-              <Link
+              {/* <Link
                 to="/contact"
                 onClick={(event) => {
                   closeMenus();
@@ -960,20 +960,8 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
                   group
                 "
               >
-                <Calendar
-                  className="
-                    w-3.5
-                    h-3.5
-
-                    transition-transform
-                    duration-300
-
-                    group-hover:rotate-6
-                  "
-                />
-
-                <span>Plan Your Visit</span>
-              </Link>
+                
+              </Link> */}
             </div>
 
             {/* =================================================

@@ -20,10 +20,10 @@ export const MORNI_DATA = {
     heading: "Where the Hills Begin to Breathe",
     subheading: "The Only Hill Station in Haryana",
     description: "Tucked away in the outer Shivalik ranges of the Himalayas, Morni Hills is a serene sanctuary situated just 45 kilometers from Chandigarh. Draped in dense pine, oak, and sal woodlands, this secluded hill station blends untouched nature, mythological legends, and historic ruins with cool mountain breezes.",
-    paragraphs: [
-      "Named after a legendary 17th-century queen who ruled Kotaha, Morni Hills offers travelers an antidote to urban chaos. The twin interconnected lakes of Tikkar Taal reflect emerald hills, while the ancient Morni Fort stands sentinel on high cliffs overlooking rolling valleys.",
-      "Home to vibrant wildlife including barking deer, wild boars, sambars, and the elusive leopard, the hills are also an ornithologist's paradise with over 80 species of Himalayan and migratory birds."
-    ],
+    // paragraphs: [
+    //   "Named after a legendary 17th-century queen who ruled Kotaha, Morni Hills offers travelers an antidote to urban chaos. The twin interconnected lakes of Tikkar Taal reflect emerald hills, while the ancient Morni Fort stands sentinel on high cliffs overlooking rolling valleys.",
+    //   "Home to vibrant wildlife including barking deer, wild boars, sambars, and the elusive leopard, the hills are also an ornithologist's paradise with over 80 species of Himalayan and migratory birds."
+    // ],
     stats: [
       { value: "1,220 m", label: "Elevation (4,000 ft)", sub: "Pleasant micro-climate" },
       { value: "Shivalik", label: "Himalayan Foothills", sub: "Ancient mountain range" },
@@ -47,7 +47,7 @@ export const MORNI_DATA = {
       category: "Heritage",
       tagline: "17th-century sentinel over Shivalik ridges",
       description: "Built during the reign of the Kotaha rulers, this stone fortress crowns a high hillcrest offering panoramic 360-degree vistas across forested valleys. Restored by Haryana Tourism, the fort grounds feature landscaped lawns, historical exhibits, and peaceful viewing points.",
-      image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80",
+      image: "/assets/Morni Fort Hilltop Ruins.png",
       elevation: "1,200 m",
       timings: "08:00 AM – 06:00 PM",
       entryFee: "₹20 (Free for children under 5)",
@@ -60,7 +60,7 @@ export const MORNI_DATA = {
       category: "Nature & Lakes",
       tagline: "Two sacred jewel lakes separated by a hillock",
       description: "The crown jewel of Morni Hills, Tikkar Taal consists of two serene interconnected bodies of water known locally as Bada Taal and Chota Taal. Surrounded by pine slopes, it is Haryana's most sought-after spot for paddle boating, kayaking, waterside picnics, and lakeside camping.",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+      image: "/assets/tikkar-taal-boating.jpg.png",
       elevation: "1,000 m",
       timings: "Open all day (Boating: 09:00 AM – 05:30 PM)",
       entryFee: "Free (Boating ₹100–₹250)",
@@ -86,7 +86,7 @@ export const MORNI_DATA = {
       category: "Viewpoints",
       tagline: "Highest elevation in Haryana at 1,467 meters",
       description: "Karoh Peak stands proudly on the border of Haryana and Himachal Pradesh as the highest geographic point in the state. Accessible via a rewarding hiking trail through pine woods, the summit rewards climbers with sweeping horizons reaching snow-dusted peaks in winter.",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+      image: "/assets/Shivalik Valley Sunbeams.png",
       elevation: "1,467 m (Haryana's Highest)",
       timings: "Sunrise to Sunset",
       entryFee: "Free",
@@ -99,7 +99,7 @@ export const MORNI_DATA = {
       category: "Adventure",
       tagline: "Dense chir pine forest walking routes and wildlife trails",
       description: "A labyrinth of gentle and moderate walking paths weaving through aromatic Chir pine and Sal tree canopy. Popular among birders, solo walkers, and nature lovers seeking fresh oxygen and pure mountain calm.",
-      image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+      image: "/assets/Aromatic Pine Canopy Walk.png",
       elevation: "1,150 m",
       timings: "Daylight hours",
       entryFee: "Free",
@@ -126,7 +126,7 @@ export const MORNI_DATA = {
     title: "Two Lakes. One Peaceful Escape.",
     subtitle: "Tikkar Taal — The Twin Lakes of Shivalik",
     description: "Separated by a low hillock yet believed to be connected by an ancient subterranean water channel, Bada Taal (Big Lake) and Chota Taal (Small Lake) mirror the shifting moods of the sky and forest. Legend holds that these sacred waters have never dried up, providing life and calm to the entire valley.",
-    image: "https://images.unsplash.com/photo-1439853941329-a99ce04b5a8a?auto=format&fit=crop&w=1600&q=85",
+    image: "/assets/tikkar-taal-boating.jpg.png",
     features: [
       { title: "Bada & Chota Taal", desc: "Two scenic natural water bodies nestled side-by-side in lush greenery." },
       { title: "Water Sports", desc: "Paddle boating, rowing, and kayaking with full safety gear provided." },
@@ -216,60 +216,429 @@ export const MORNI_DATA = {
     }
   ],
 
-  restaurants: [
-    {
-      id: "shivalik-pines-kitchen",
-      name: "The Shivalik Pine Kitchen",
-      cuisine: "Authentic Haryanvi & North Indian",
-      location: "Near Morni Fort Road",
-      rating: 4.8,
-      reviewsCount: 320,
-      priceRange: "₹₹ (Moderate)",
-      image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=800&q=80",
-      description: "Famous for traditional clay-oven tandoori breads, Bajra Roti with fresh homemade white butter, Sarson Ka Saag, and rich slow-simmered Dal Makhani with scenic patio seating.",
-      specialties: ["Bajra Roti with White Makkhan", "Desi Ghee Kadhi Pakora", "Smoked Paneer Tikka", "Kullhad Mountain Chai"],
-      features: ["Outdoor Terrace", "Pure Vegetarian Options", "Mountain Views", "Parking Available"]
+ restaurants: [
+  {
+    id: 1,
+    slug: "the-hill-kitchen",
+
+    name: "The Hill Kitchen",
+    cuisine: "Himachali Cuisine",
+
+    location: "Morni Hills",
+    address: "Morni Hills, Haryana",
+
+    rating: "4.8",
+    reviewsCount: 124,
+
+
+    image: "/assets/restaurent/The Hill Kitchen.png",
+
+    description:
+      "A warm mountain dining experience inspired by traditional Himachali flavours and local ingredients.",
+
+    about:
+      "The Hill Kitchen brings the authentic taste of the hills to your table. Enjoy traditional recipes, locally inspired flavours and a peaceful dining atmosphere surrounded by the beauty of Morni.",
+
+    specialties: [
+      "Himachali Dham",
+      "Siddu with Ghee",
+      "Rajma Chawal",
+      "Chha Gosht",
+    ],
+
+    features: [
+      "Mountain View",
+      "Outdoor Seating",
+      "Family Friendly",
+      "Local Cuisine",
+    ],
+
+    gallery: [
+      "/assets/restaurent/The Hill Kitchen.png",
+      "/assets/restaurent/Interior1.png",
+      "/assets/restaurent/Interior2.png",
+      "/assets/Authentic Mountain Kulhad Chai & Delicacies.png",
+    ],
+
+    menu: [
+      {
+        category: "Starters",
+        items: [
+          {
+            name: "Himachali Siddu",
+            description: "Traditional steamed Himachali bread",
+            price: "₹180",
+          },
+          {
+            name: "Paneer Tikka",
+            description: "Chargrilled cottage cheese",
+            price: "₹280",
+          },
+        ],
+      },
+
+      {
+        category: "Main Course",
+        items: [
+          {
+            name: "Rajma Chawal",
+            description: "Slow cooked rajma served with steamed rice",
+            price: "₹240",
+          },
+          {
+            name: "Chha Gosht",
+            description: "Traditional Himachali mutton curry",
+            price: "₹420",
+          },
+        ],
+      },
+
+      {
+        category: "Desserts",
+        items: [
+          {
+            name: "Gulab Jamun",
+            description: "Soft milk dumplings served warm",
+            price: "₹140",
+          },
+        ],
+      },
+    ],
+
+    timings: {
+      monday: "10:00 AM – 10:00 PM",
+      tuesday: "10:00 AM – 10:00 PM",
+      wednesday: "10:00 AM – 10:00 PM",
+      thursday: "10:00 AM – 10:00 PM",
+      friday: "10:00 AM – 11:00 PM",
+      saturday: "10:00 AM – 11:00 PM",
+      sunday: "10:00 AM – 10:00 PM",
     },
-    {
-      id: "tikkar-lakeview-cafe",
-      name: "Tikkar Taal Lakeview Bistro",
-      cuisine: "Continental, Cafe & Fast Casual",
-      location: "Tikkar Taal Lakefront Promenade",
-      rating: 4.6,
-      reviewsCount: 450,
-      priceRange: "₹₹ (Moderate)",
-      image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80",
-      description: "Perched right beside the twin lakes, this airy wooden cafe serves freshly brewed artisan espresso, wood-fired artisan flatbreads, grilled sandwiches, and herbal mountain infusions.",
-      specialties: ["Shivalik Wood-fired Pizza", "Nutella Pancake Stack", "Ginger Lemongrass Tea", "Loaded Mountain Fries"],
-      features: ["Lakefront Deck", "Free Wi-Fi", "Pet Friendly", "Sunset Spot"]
+
+    phone: "+91 98765 43210",
+
+    bookingUrl: "#",
+  },
+
+  {
+    id: 2,
+    slug: "lakeview-bistro",
+
+    name: "Lakeview Bistro",
+    cuisine: "Modern Indian",
+
+    location: "Near Tikkar Taal",
+    address: "Tikkar Taal, Morni Hills, Haryana",
+
+    rating: "4.7",
+    reviewsCount: 98,
+    priceRange: "₹₹₹",
+
+    image: "/assets/restaurent/Lakeview Bisto.png",
+
+    description:
+      "A contemporary lakeside dining experience combining modern cuisine with breathtaking views.",
+
+    about:
+      "Lakeview Bistro is designed for slow afternoons, beautiful sunsets and memorable meals. Enjoy modern Indian flavours with a relaxed lakeside ambience.",
+
+    specialties: [
+      "Wood Fired Pizza",
+      "Indian Fusion",
+      "Fresh Salads",
+      "Artisan Desserts",
+    ],
+
+    features: [
+      "Lake View",
+      "Sunset Dining",
+      "Outdoor Seating",
+      "Pet Friendly",
+    ],
+
+    gallery: [
+      "/assets/restaurent/Lakeview Bisto.png",
+      "/assets/restaurent/Interior1.png",
+      "/assets/restaurent/Interior3.png",
+      "/assets/restaurent/Interior4.png",
+    ],
+
+    menu: [
+      {
+        category: "Starters",
+        items: [
+          {
+            name: "Paneer Tikka",
+            description: "Smoked paneer with house spices",
+            price: "₹320",
+          },
+          {
+            name: "Crispy Corn",
+            description: "Crispy corn with herbs and spices",
+            price: "₹260",
+          },
+        ],
+      },
+
+      {
+        category: "Main Course",
+        items: [
+          {
+            name: "Butter Chicken",
+            description: "Creamy tomato based classic",
+            price: "₹420",
+          },
+          {
+            name: "Truffle Pasta",
+            description: "Creamy pasta with truffle oil",
+            price: "₹480",
+          },
+        ],
+      },
+
+      {
+        category: "Desserts",
+        items: [
+          {
+            name: "Chocolate Fondant",
+            description: "Warm chocolate cake with molten centre",
+            price: "₹280",
+          },
+        ],
+      },
+    ],
+
+    timings: {
+      monday: "11:00 AM – 10:00 PM",
+      tuesday: "11:00 AM – 10:00 PM",
+      wednesday: "11:00 AM – 10:00 PM",
+      thursday: "11:00 AM – 10:00 PM",
+      friday: "11:00 AM – 11:00 PM",
+      saturday: "10:00 AM – 11:00 PM",
+      sunday: "10:00 AM – 10:00 PM",
     },
-    {
-      id: "kotaha-heritage-restaurant",
-      name: "Kotaha Royal Courtyard",
-      cuisine: "Mughlai, Awadhi & Royal Indian",
-      location: "Kotaha Hills Road, Morni",
-      rating: 4.9,
-      reviewsCount: 190,
-      priceRange: "₹₹₹ (Fine Dining)",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80",
-      description: "Set within a heritage-inspired stone courtyard with candlelight and soft classical instrumental music, serving royal slow-cooked delicacies and curated vegetarian thalis.",
-      specialties: ["Shahi Paneer Dum Pukht", "Subz Biryani Handi", "Tandoori Malai Broccoli", "Gulab Jamun with Rabri"],
-      features: ["Fine Dining Ambience", "Private Cabanas", "Live Sitar on Weekends", "Cocktail & Mocktail Bar"]
+
+    phone: "+91 98765 43211",
+
+    bookingUrl: "#",
+  },
+
+  {
+    id: 3,
+    slug: "royal-courtyard",
+
+    name: "Royal Courtyard",
+    cuisine: "North Indian",
+
+    location: "Morni",
+    address: "Morni Hills, Haryana",
+
+    rating: "4.9",
+    reviewsCount: 156,
+    priceRange: "₹₹₹",
+
+    image: "/assets/restaurent/Royal.png",
+
+    description:
+      "Elegant courtyard dining inspired by royal Indian hospitality and traditional flavours.",
+
+    about:
+      "Royal Courtyard celebrates India's rich culinary heritage through refined North Indian cuisine, warm hospitality and an intimate courtyard setting.",
+
+    specialties: [
+      "Dal Makhani",
+      "Galouti Kebab",
+      "Butter Chicken",
+      "Biryani",
+    ],
+
+    features: [
+      "Courtyard Dining",
+      "Premium Dining",
+      "Family Friendly",
+      "Private Events",
+    ],
+
+    gallery: [
+      "/assets/restaurent/Royal.png",
+      "/assets/restaurent/Interior2.png",
+      "/assets/restaurent/Interior3.png",
+      "/assets/restaurent/Interior4.png",
+    ],
+
+    menu: [
+      {
+        category: "Starters",
+        items: [
+          {
+            name: "Galouti Kebab",
+            description: "Tender minced meat kebabs",
+            price: "₹480",
+          },
+          {
+            name: "Paneer Angara",
+            description: "Smoked paneer with royal spices",
+            price: "₹360",
+          },
+        ],
+      },
+
+      {
+        category: "Main Course",
+        items: [
+          {
+            name: "Dal Makhani",
+            description: "Slow cooked black lentils",
+            price: "₹320",
+          },
+          {
+            name: "Butter Chicken",
+            description: "Classic creamy North Indian curry",
+            price: "₹460",
+          },
+          {
+            name: "Royal Biryani",
+            description: "Fragrant basmati rice with aromatic spices",
+            price: "₹520",
+          },
+        ],
+      },
+
+      {
+        category: "Desserts",
+        items: [
+          {
+            name: "Shahi Tukda",
+            description: "Traditional royal Indian dessert",
+            price: "₹220",
+          },
+        ],
+      },
+    ],
+
+    timings: {
+      monday: "12:00 PM – 10:30 PM",
+      tuesday: "12:00 PM – 10:30 PM",
+      wednesday: "12:00 PM – 10:30 PM",
+      thursday: "12:00 PM – 10:30 PM",
+      friday: "12:00 PM – 11:00 PM",
+      saturday: "12:00 PM – 11:00 PM",
+      sunday: "12:00 PM – 10:30 PM",
     },
-    {
-      id: "orchard-farm-table",
-      name: "Pine & Orchard Tea House",
-      cuisine: "Farm-to-Table, Organic & Health",
-      location: "Mandhana Village Outskirts",
-      rating: 4.7,
-      reviewsCount: 210,
-      priceRange: "₹₹ (Moderate)",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-      description: "An eco-friendly garden eatery using 100% locally harvested organic ingredients from nearby hill farms. Savor fresh honey-lemon teas, garden-fresh salads, and multigrain parathas.",
-      specialties: ["Wild Mountain Honey Waffles", "Farm Fresh Garden Salad", "Buckwheat Paratha", "Himalayan Pink Salt Lassi"],
-      features: ["Organic Garden Setting", "Farm Tour Included", "Vegan Friendly", "Artisan Honey for Sale"]
-    }
-  ],
+
+    phone: "+91 98765 43212",
+
+    bookingUrl: "#",
+  },
+
+  {
+    id: 4,
+    slug: "mountain-brew-co",
+
+    name: "Mountain Brew Co.",
+    cuisine: "Cafe & Bakery",
+
+    location: "Morni Hills",
+    address: "Morni Hills, Haryana",
+
+    rating: "4.6",
+    reviewsCount: 87,
+    priceRange: "₹₹",
+
+    image: "/assets/restaurent/Mountain Brew.png",
+
+    description:
+      "A cosy mountain cafe serving fresh coffee, baked treats and comforting food.",
+
+    about:
+      "Mountain Brew Co. is a relaxed hillside cafe created for coffee lovers, slow mornings and conversations over freshly baked treats.",
+
+    specialties: [
+      "Specialty Coffee",
+      "Fresh Croissants",
+      "Wood Fired Pizza",
+      "Mountain Tea",
+    ],
+
+    features: [
+      "Mountain View",
+      "Free Wi-Fi",
+      "Pet Friendly",
+      "Breakfast",
+    ],
+
+    gallery: [
+      "/assets/restaurent/Mountain Brew.png",
+      "/assets/restaurent/Interior1.png",
+      "/assets/restaurent/Interior2.png",
+      "/assets/Authentic Mountain Kulhad Chai & Delicacies.png",
+    ],
+
+    menu: [
+      {
+        category: "Breakfast",
+        items: [
+          {
+            name: "Classic Pancakes",
+            description: "Fluffy pancakes with maple syrup",
+            price: "₹280",
+          },
+          {
+            name: "Avocado Toast",
+            description: "Sourdough toast with avocado",
+            price: "₹320",
+          },
+        ],
+      },
+
+      {
+        category: "Cafe",
+        items: [
+          {
+            name: "Cappuccino",
+            description: "Freshly brewed espresso with steamed milk",
+            price: "₹180",
+          },
+          {
+            name: "Mountain Brew",
+            description: "House special coffee blend",
+            price: "₹220",
+          },
+        ],
+      },
+
+      {
+        category: "Bakery",
+        items: [
+          {
+            name: "Butter Croissant",
+            description: "Freshly baked French-style croissant",
+            price: "₹160",
+          },
+          {
+            name: "Chocolate Cake",
+            description: "Rich chocolate cake",
+            price: "₹240",
+          },
+        ],
+      },
+    ],
+
+    timings: {
+      monday: "08:00 AM – 09:00 PM",
+      tuesday: "08:00 AM – 09:00 PM",
+      wednesday: "08:00 AM – 09:00 PM",
+      thursday: "08:00 AM – 09:00 PM",
+      friday: "08:00 AM – 10:00 PM",
+      saturday: "08:00 AM – 10:00 PM",
+      sunday: "08:00 AM – 09:00 PM",
+    },
+
+    phone: "+91 98765 43213",
+
+    bookingUrl: "#",
+  },
+],
 
   resorts: [
     {
@@ -293,7 +662,7 @@ export const MORNI_DATA = {
       rating: 4.8,
       reviewsCount: 340,
       pricePerNight: "₹4,200",
-      image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80",
+      image: "/assets/Luxury Glamping Under the Stars.png",
       description: "Experience the thrill of camping without giving up modern luxuries. Geodesic glass-roof domes with cozy king beds, attached designer bathrooms, barbecue grill pits, and unobstructed lake reflections.",
       amenities: ["Glass Stargazing Roof", "Private Lake Deck", "BBQ & Bonfire Setup", "Ensuite Modern Baths", "Kayaking Included", "Live Acoustic Music"],
       featured: true

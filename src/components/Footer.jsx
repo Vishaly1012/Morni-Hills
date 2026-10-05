@@ -235,7 +235,7 @@ export default function Footer() {
           </p>
 
           <p className="flex items-center gap-1">
-            Made for nature lovers
+            Created by DivniQ
             <Heart className="w-3 h-3 text-teal-300 fill-current" />
           </p>
 

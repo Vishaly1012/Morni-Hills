@@ -11,7 +11,7 @@ import {
 export default function NearbyPlaces({ onSelectNearby }) {
   const { nearbyPlaces } = MORNI_DATA;
 
-  console.log("Nearby Places:", nearbyPlaces);
+  // console.log("Nearby Places:", nearbyPlaces);
 
   return (
     <section

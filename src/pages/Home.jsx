@@ -15,6 +15,9 @@ import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Modal from "../components/Modal";
 import Lightbox from "../components/Lightbox";
+import ScrollReveal from "../components/ScrollReveal";
+import { CheckCircle2, MapPin, Sparkles, Trees } from "lucide-react";
+import { MORNI_DATA } from "../data/morniData";
 
 export default function Home({ darkMode, setDarkMode }) {
   // Modal State
@@ -23,6 +26,8 @@ export default function Home({ darkMode, setDarkMode }) {
     data: null,
     type: "attraction",
   });
+
+    const { about } = MORNI_DATA;
 
   // Lightbox State
   const [lightboxState, setLightboxState] = useState({
@@ -142,7 +147,306 @@ export default function Home({ darkMode, setDarkMode }) {
         />
 
         {/* 2. About */}
-        <About />
+        {/* <About /> */}
+
+        {/* 2. About */}
+        <div className="max-w-7xl my-20 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+                  {/* =====================================================
+                      HERO / MAIN ABOUT
+                  ===================================================== */}
+        
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        
+                    {/* LEFT - VIDEO */}
+                    <div className="lg:col-span-6 relative">
+        
+                      <ScrollReveal delay={0} distance={45}>
+        
+                        <div className="relative mx-auto max-w-md lg:max-w-none">
+        
+                          {/* Decorative Frame */}
+                          <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-morni-primary/20 via-morni-accent/20 to-transparent blur-lg opacity-70" />
+        
+                          {/* Video */}
+                          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/60 dark:border-white/10 group">
+        
+                            <video
+                              src="/assets/Morni_02.mp4"
+                              autoPlay
+                              muted
+                              loop
+                              playsInline
+                              className="w-full h-[480px] sm:h-[560px] lg:h-[650px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                            />
+        
+                            {/* Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+        
+                            {/* Video Text */}
+                            <div className="absolute bottom-7 left-7 right-7 text-white">
+        
+                              <div className="flex items-center gap-2 mb-2">
+                                <MapPin className="w-4 h-4 text-morni-accent" />
+        
+                                <span className="text-xs uppercase tracking-widest">
+                                  Panchkula, Haryana
+                                </span>
+                              </div>
+        
+                              <h3 className="font-serif text-2xl sm:text-3xl font-bold">
+                                Discover Morni Hills
+                              </h3>
+        
+                            </div>
+                          </div>
+        
+                          {/* Floating Badge */}
+                          <div
+                            className="
+                              absolute -top-4 right-3
+                              sm:-top-5 sm:right-4
+                              lg:-right-4 xl:-right-5
+                              z-20
+                              bg-white dark:bg-morni-dark-card
+                              px-4 py-3 sm:px-5 sm:py-4
+                              rounded-2xl shadow-xl
+                              border border-morni-primary/20 dark:border-morni-secondary/20
+                              flex items-center gap-3
+                              animate-float-slow
+                            "
+                          >
+        
+                            <div
+                              className="
+                                w-10 h-10 shrink-0 rounded-xl
+                                bg-morni-primary/15 dark:bg-morni-secondary/20
+                                text-morni-primary dark:text-morni-secondary
+                                flex items-center justify-center
+                              "
+                            >
+                              <Trees className="w-5 h-5" />
+                            </div>
+        
+                            <div>
+                              <div className="text-base sm:text-lg font-serif font-bold text-morni-dark dark:text-white whitespace-nowrap">
+                                100% Pure
+                              </div>
+        
+                              <div className="text-xs text-morni-dark/60 dark:text-morni-light/60 whitespace-nowrap">
+                                Mountain Air
+                              </div>
+                            </div>
+        
+                          </div>
+        
+                        </div>
+        
+                      </ScrollReveal>
+        
+                    </div>
+        
+                    {/* RIGHT - CONTENT */}
+                    <div className="w-full min-w-0 lg:col-span-6">
+        
+                      <ScrollReveal delay={100} distance={25}>
+        
+                        <div className="w-full max-w-none">
+        
+                          {/* Tag */}
+                          <div
+                            className="
+                              inline-flex items-center gap-2
+                              px-3 py-1.5
+                              rounded-full
+                              bg-morni-primary/10 dark:bg-morni-secondary/20
+                              text-morni-primary dark:text-morni-secondary
+                              border border-morni-primary/20
+                              text-[11px] sm:text-xs
+                              font-semibold tracking-wider uppercase
+                              mb-4 lg:mb-5
+                            "
+                          >
+                            <Sparkles className="w-3.5 h-3.5 shrink-0" />
+        
+                            <span>ABOUT MORNI HILLS</span>
+                          </div>
+        
+                          {/* Heading */}
+                          <h1
+                            className="
+                              heading-section
+                              !text-4xl sm:!text-5xl xl:!text-6xl
+                              !leading-[1.05]
+                              !tracking-tight
+                              mb-5 lg:mb-6
+                            "
+                          >
+                            Where the Hills
+                            <br />
+        
+                            <span className="italic text-morni-primary dark:text-morni-secondary">
+                              Begin to Breathe
+                            </span>
+                          </h1>
+        
+                          {/* Main Description */}
+                          <p
+                            className="
+                              text-[15px] sm:text-base lg:text-lg
+                              text-morni-dark/80 dark:text-morni-light/80
+                              leading-[1.7]
+                              mb-4 lg:mb-5
+                            "
+                          >
+                            {about.description}
+                          </p>
+        
+                          {/* Existing Data */}
+                          {about.paragraphs?.map((paragraph, index) => (
+                            <p
+                              key={index}
+                              className="
+                                text-sm sm:text-[15px] lg:text-base
+                                text-morni-dark/70 dark:text-morni-light/70
+                                leading-[1.7]
+                                mb-4
+                              "
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+        
+                          {/* Additional Content */}
+                          <p
+                            className="
+                              text-sm sm:text-[15px] lg:text-base
+                              text-morni-dark/70 dark:text-morni-light/70
+                              leading-[1.7]
+                              mb-5
+                            "
+                          >
+                            Away from the fast pace of city life, Morni offers
+                            travellers the opportunity to slow down and enjoy the
+                            simple beauty of nature. A drive through the hills, a
+                            peaceful morning beside the lake or an evening overlooking
+                            the valleys can turn an ordinary weekend into a memorable
+                            experience.
+                          </p>
+        
+                        </div>
+        
+                      </ScrollReveal>
+        
+                      {/* HIGHLIGHTS */}
+                      <ScrollReveal delay={150} distance={20}>
+        
+                        <div
+                          className="
+                            grid grid-cols-1 sm:grid-cols-2 gap-x-5 lg:gap-x-6
+                            gap-y-3
+                            mb-7 lg:mb-8
+                          "
+                        >
+                          {about.highlights?.map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="
+                                flex items-start gap-2.5
+                                text-[13px] sm:text-sm
+                                font-medium
+                                text-morni-dark/90 dark:text-morni-light/90
+                                leading-relaxed
+                                min-w-0
+                              "
+                            >
+                              <CheckCircle2
+                                className="
+                                  w-4 h-4 mt-0.5
+                                  text-morni-primary dark:text-morni-secondary
+                                  shrink-0
+                                "
+                              />
+        
+                              <span className="min-w-0">
+                                {item}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+        
+                      </ScrollReveal>
+        
+                      {/* STATISTICS */}
+                      <ScrollReveal delay={200} distance={20}>
+        
+                        <div
+                          className="
+                            grid grid-cols-2 sm:grid-cols-4
+                            gap-3
+                            pt-5 lg:pt-6
+                            border-t border-morni-dark/10 dark:border-white/10
+                          "
+                        >
+                          {about.stats?.map((stat, idx) => (
+                            <div
+                              key={idx}
+                              className="
+                                min-w-0 p-3 sm:p-3.5
+                                rounded-xl lg:rounded-2xl
+                                bg-white/70 dark:bg-morni-dark-card/60
+                                backdrop-blur-sm
+                                border border-morni-dark/5 dark:border-white/5
+                                text-center sm:text-left
+                                transition-transform
+                                hover:-translate-y-1
+                                duration-300
+                              "
+                            >
+                              <div
+                                className="
+                                  font-serif
+                                  text-xl sm:text-2xl
+                                  font-bold
+                                  text-morni-primary dark:text-morni-accent
+                                  leading-tight
+                                "
+                              >
+                                {stat.value}
+                              </div>
+        
+                              <div
+                                className="
+                                  text-xs
+                                  font-semibold
+                                  text-morni-dark/90 dark:text-white
+                                  mt-1
+                                  leading-snug
+                                "
+                              >
+                                {stat.label}
+                              </div>
+        
+                              <div
+                                className="
+                                  text-[10px]
+                                  text-morni-dark/60 dark:text-morni-light/60
+                                  mt-1
+                                  leading-snug
+                                "
+                              >
+                                {stat.sub}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+        
+                      </ScrollReveal>
+        
+                    </div>
+                  </div>
+        
+                </div>
 
         {/* 3. Attractions */}
         <Attractions
@@ -207,7 +511,7 @@ export default function Home({ darkMode, setDarkMode }) {
       </main>
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
 
       {/* Scroll To Top */}
       <ScrollToTop />

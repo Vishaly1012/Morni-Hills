@@ -48,6 +48,7 @@ export default function Hero({ onOpenPlanner , darkMode }) {
       id="hero"
       className={`relative w-full min-h-screen flex items-center justify-center overflow-hidden ${
   darkMode ? "bg-morni-dark" : "bg-slate-100"
+  
 }`}
     >
       {/* 1. Cinematic Background Layer with Parallax & Realistic Photography */}
@@ -151,9 +152,9 @@ export default function Hero({ onOpenPlanner , darkMode }) {
                 }
               }
             }}
-            className="btn-outline-light w-full sm:w-auto font-medium text-sm sm:text-base shadow-xl flex items-center justify-center gap-2"
+            // className="btn-outline-light w-full sm:w-auto font-medium text-sm sm:text-base shadow-xl flex items-center justify-center gap-2"
           >
-            <span>Plan Your Visit</span>
+            {/* <span>Account</span> */}
           </button>
         </div>
 

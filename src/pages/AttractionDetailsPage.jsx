@@ -1,0 +1,644 @@
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Clock,
+  Mountain,
+  MapPin,
+  IndianRupee,
+  CalendarDays,
+  CheckCircle2,
+  Sparkles,
+} from "lucide-react";
+
+import { MORNI_DATA } from "../data/morniData";
+
+export default function AttractionDetailsPage() {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+
+  // Find attraction using the ID from URL
+const attraction = MORNI_DATA.attractions.find(
+  (item) => item.id === slug
+);
+
+  // If attraction doesn't exist
+  if (!attraction) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-morni-light dark:bg-morni-dark px-6">
+        <div className="text-center">
+          <h1 className="text-3xl font-serif font-bold text-morni-dark dark:text-white mb-4">
+            Attraction Not Found
+          </h1>
+
+          <p className="text-morni-dark/60 dark:text-morni-light/60 mb-6">
+            The attraction you're looking for doesn't exist.
+          </p>
+
+          <button
+            onClick={() => navigate("/explore")}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-morni-primary text-white font-semibold hover:bg-morni-primary/90 transition-all"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Explore
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-morni-light-surface dark:bg-morni-dark text-morni-dark dark:text-white transition-colors duration-500">
+
+      {/* =========================================================
+          HERO SECTION
+      ========================================================= */}
+      <section className="relative min-h-[70vh] lg:min-h-[78vh] overflow-hidden">
+
+        {/* Background Image */}
+        <img
+          src={attraction.image}
+          alt={attraction.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Dark Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+
+        {/* Top Gradient */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/70 to-transparent" />
+
+        {/* Back Button */}
+        <div className="absolute top-24 left-4 sm:left-8 lg:left-12 z-20">
+          <button
+            onClick={() => navigate("/explore")}
+            className="
+              group
+              inline-flex
+              items-center
+              gap-2
+              px-4
+              py-2.5
+              rounded-full
+              bg-black/40
+              backdrop-blur-xl
+              border border-white/20
+              text-white
+              text-sm
+              font-medium
+              hover:bg-white
+              hover:text-morni-dark
+              transition-all
+              duration-300
+            "
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Explore
+          </button>
+        </div>
+
+        {/* Hero Content */}
+        <div className="absolute inset-x-0 bottom-0 z-10">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pb-12 lg:pb-16">
+
+            {/* Category */}
+            <div className="mb-5">
+              <span
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  px-4
+                  py-2
+                  rounded-full
+                  bg-morni-accent
+                  text-morni-dark
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                "
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                {attraction.category}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1
+              className="
+                max-w-4xl
+                font-serif
+                text-4xl
+                sm:text-5xl
+                lg:text-7xl
+                font-bold
+                leading-[0.95]
+                text-white
+                mb-5
+              "
+            >
+              {attraction.title}
+            </h1>
+
+            {/* Tagline */}
+            <p
+              className="
+                max-w-2xl
+                text-base
+                sm:text-lg
+                lg:text-xl
+                text-white/80
+                leading-relaxed
+              "
+            >
+              {attraction.tagline}
+            </p>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          QUICK INFO
+      ========================================================= */}
+      <section className="relative z-20 -mt-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+
+          <div
+            className="
+              grid
+              grid-cols-2
+              lg:grid-cols-4
+              rounded-3xl
+              overflow-hidden
+              bg-white
+              dark:bg-morni-dark-card
+              border
+              border-morni-dark/10
+              dark:border-white/10
+              shadow-2xl
+            "
+          >
+
+            {/* Elevation */}
+            <InfoItem
+              icon={<Mountain />}
+              label="Elevation"
+              value={attraction.elevation}
+            />
+
+            {/* Timings */}
+            <InfoItem
+              icon={<Clock />}
+              label="Timings"
+              value={attraction.timings}
+            />
+
+            {/* Entry Fee */}
+            <InfoItem
+              icon={<IndianRupee />}
+              label="Entry Fee"
+              value={attraction.entryFee || "Free"}
+            />
+
+            {/* Best Time */}
+            <InfoItem
+              icon={<CalendarDays />}
+              label="Best Time"
+              value={attraction.bestTime || "All year"}
+            />
+
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          MAIN CONTENT
+      ========================================================= */}
+      <section className="py-20 lg:py-28 px-5 sm:px-8 lg:px-12">
+
+        <div className="max-w-6xl mx-auto">
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_0.8fr] gap-14 lg:gap-20">
+
+            {/* =====================================================
+                LEFT CONTENT
+            ===================================================== */}
+            <div>
+
+              {/* OVERVIEW */}
+              <div className="mb-16">
+
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-[2px] bg-morni-primary dark:bg-morni-secondary" />
+
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-morni-primary dark:text-morni-secondary">
+                    Overview
+                  </span>
+                </div>
+
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                  Discover{" "}
+                  <span className="italic text-morni-primary dark:text-morni-secondary">
+                    {attraction.title}
+                  </span>
+                </h2>
+
+                <p className="text-base sm:text-lg leading-8 text-morni-dark/70 dark:text-morni-light/70">
+                  {attraction.description}
+                </p>
+
+              </div>
+
+
+              {/* KEY HIGHLIGHTS */}
+              {attraction.highlights?.length > 0 && (
+                <div>
+
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-[2px] bg-morni-primary dark:bg-morni-secondary" />
+
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-morni-primary dark:text-morni-secondary">
+                      Key Highlights
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                    {attraction.highlights.map((highlight, index) => (
+                      <div
+                        key={index}
+                        className="
+                          group
+                          flex
+                          items-center
+                          gap-4
+                          p-5
+                          rounded-2xl
+                          bg-white
+                          dark:bg-morni-dark-card
+                          border
+                          border-morni-dark/10
+                          dark:border-white/10
+                          hover:-translate-y-1
+                          hover:shadow-xl
+                          hover:border-morni-primary/30
+                          transition-all
+                          duration-300
+                        "
+                      >
+
+                        <div
+                          className="
+                            flex
+                           flex-shrink-0
+                            items-center
+                            justify-center
+                            w-10
+                            h-10
+                            rounded-full
+                            bg-morni-primary/10
+                            dark:bg-morni-secondary/10
+                            text-morni-primary
+                            dark:text-morni-secondary
+                            group-hover:bg-morni-primary
+                            group-hover:text-white
+                            transition-all
+                          "
+                        >
+                          <CheckCircle2 className="w-5 h-5" />
+                        </div>
+
+                        <span className="text-sm sm:text-base font-semibold">
+                          {highlight}
+                        </span>
+
+                      </div>
+                    ))}
+
+                  </div>
+
+                </div>
+              )}
+
+            </div>
+
+
+            {/* =====================================================
+                RIGHT SIDEBAR
+            ===================================================== */}
+            <aside>
+
+              <div
+                className="
+                  sticky
+                  top-28
+                  rounded-3xl
+                  overflow-hidden
+                  bg-morni-dark
+                  dark:bg-morni-dark-card
+                  border
+                  border-white/10
+                  shadow-2xl
+                "
+              >
+
+                {/* Sidebar Header */}
+                <div className="p-7 border-b border-white/10">
+
+                  <span className="text-xs uppercase tracking-[0.2em] text-morni-accent font-bold">
+                    Plan Your Visit
+                  </span>
+
+                  <h3 className="font-serif text-2xl font-bold text-white mt-3">
+                    Make the most of your trip
+                  </h3>
+
+                </div>
+
+
+                {/* Visit Details */}
+                <div className="p-7 space-y-6">
+
+                  <DetailRow
+                    icon={<MapPin />}
+                    title="Location"
+                    value="Morni Hills, Panchkula, Haryana"
+                  />
+
+                  <DetailRow
+                    icon={<Clock />}
+                    title="Opening Hours"
+                    value={attraction.timings}
+                  />
+
+                  <DetailRow
+                    icon={<IndianRupee />}
+                    title="Entry Fee"
+                    value={attraction.entryFee || "Free Entry"}
+                  />
+
+                  <DetailRow
+                    icon={<CalendarDays />}
+                    title="Best Time"
+                    value={attraction.bestTime || "Throughout the year"}
+                  />
+
+                </div>
+
+
+                {/* CTA */}
+                <div className="p-7 pt-0">
+
+                  <button
+                    onClick={() => navigate("/contact")}
+                    className="
+                      w-full
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      px-6
+                      py-4
+                      rounded-2xl
+                      bg-morni-accent
+                      text-morni-dark
+                      font-bold
+                      uppercase
+                      tracking-wider
+                      text-xs
+                      hover:bg-white
+                      transition-all
+                      duration-300
+                      group
+                    "
+                  >
+                    Plan Your Visit
+
+                    <ArrowUpRight
+                      className="
+                        w-4
+                        h-4
+                        group-hover:translate-x-1
+                        group-hover:-translate-y-1
+                        transition-transform
+                      "
+                    />
+                  </button>
+
+                </div>
+
+              </div>
+
+            </aside>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* =========================================================
+          BOTTOM CTA
+      ========================================================= */}
+      <section className="px-5 sm:px-8 lg:px-12 pb-20 lg:pb-28">
+
+        <div
+          className="
+            max-w-6xl
+            mx-auto
+            relative
+            overflow-hidden
+            rounded-[2rem]
+            bg-morni-primary
+            dark:bg-morni-dark-card
+            border
+            border-white/10
+            p-8
+            sm:p-12
+            lg:p-16
+          "
+        >
+
+          {/* Decorative Circle */}
+          <div
+            className="
+              absolute
+              -right-20
+              -top-20
+              w-72
+              h-72
+              rounded-full
+              bg-white/10
+              blur-2xl
+            "
+          />
+
+          <div className="relative z-10 max-w-2xl">
+
+            <span className="text-xs uppercase tracking-[0.2em] font-bold text-morni-accent">
+              Explore More
+            </span>
+
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-4 mb-5">
+              Discover more places in Morni
+            </h2>
+
+            <p className="text-white/70 leading-relaxed mb-8">
+              Explore the forests, lakes, viewpoints and heritage sites
+              that make Morni Hills a memorable mountain escape.
+            </p>
+
+            <button
+              onClick={() => navigate("/explore")}
+              className="
+                inline-flex
+                items-center
+                gap-2
+                px-6
+                py-3.5
+                rounded-full
+                bg-white
+                text-morni-dark
+                font-bold
+                text-sm
+                hover:bg-morni-accent
+                transition-all
+                duration-300
+                group
+              "
+            >
+              Explore All Attractions
+
+              <ArrowUpRight
+                className="
+                  w-4
+                  h-4
+                  group-hover:translate-x-1
+                  group-hover:-translate-y-1
+                  transition-transform
+                "
+              />
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+  );
+}
+
+
+/* ===============================================================
+   INFO ITEM
+================================================================ */
+
+function InfoItem({ icon, label, value }) {
+  return (
+    <div
+      className="
+        p-5
+        sm:p-6
+        border-r
+        border-b
+        last:border-r-0
+        border-morni-dark/10
+        dark:border-white/10
+        lg:border-b-0
+        hover:bg-morni-primary/5
+        dark:hover:bg-white/5
+        transition-colors
+      "
+    >
+
+      <div className="flex items-start gap-3">
+
+        <div
+          className="
+            flex
+            items-center
+            justify-center
+            w-10
+            h-10
+            rounded-xl
+            bg-morni-primary/10
+            dark:bg-morni-secondary/10
+            text-morni-primary
+            dark:text-morni-secondary
+            flex-shrink-0
+          "
+        >
+          {React.cloneElement(icon, {
+            className: "w-4 h-4",
+          })}
+        </div>
+
+        <div className="min-w-0">
+
+          <p className="text-[10px] uppercase tracking-widest font-bold text-morni-dark/40 dark:text-morni-light/40 mb-1">
+            {label}
+          </p>
+
+          <p className="text-xs sm:text-sm font-semibold leading-5">
+            {value}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+
+/* ===============================================================
+   DETAIL ROW
+================================================================ */
+
+function DetailRow({ icon, title, value }) {
+  return (
+    <div className="flex gap-4">
+
+      <div
+        className="
+          flex
+          items-center
+          justify-center
+          w-10
+          h-10
+          rounded-xl
+          bg-white/10
+          text-morni-accent
+          flex-shrink-0
+        "
+      >
+        {React.cloneElement(icon, {
+          className: "w-4 h-4",
+        })}
+      </div>
+
+      <div>
+
+        <p className="text-[10px] uppercase tracking-widest font-bold text-white/40 mb-1">
+          {title}
+        </p>
+
+        <p className="text-sm text-white/80 leading-5">
+          {value}
+        </p>
+
+      </div>
+
+    </div>
+  );
+}

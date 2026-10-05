@@ -242,8 +242,7 @@ function ContactPage() {
 
                 <div
                   className="
-                    group
-                    flex
+                    group flex
                     gap-5
                     rounded-3xl
                     bg-white

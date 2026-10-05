@@ -1,8 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import About from "./pages/AboutPage";
@@ -11,34 +11,22 @@ import ExperiencePage from "./pages/ExperiencePage";
 import TikkarTaal from "./pages/TikkarTaalPage";
 import StayPage from "./pages/StayPage";
 import EatPage from "./pages/EatPage";
+import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
 import NearbyDestinationPage from "./pages/NearbyDestinationPage";
 import GalleryPage from "./pages/GalleryPage";
+import AttractionDetailsPage from "./pages/AttractionDetailsPage";
 import ContactPage from "./pages/ContactPage";
 
 function App() {
-  // --------------------------------
-  // DARK / LIGHT MODE STATE
-  // --------------------------------
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("morni-theme");
 
-    // If theme is saved as dark
-    if (savedTheme === "dark") {
-      return true;
-    }
+    if (savedTheme === "dark") return true;
+    if (savedTheme === "light") return false;
 
-    // If theme is saved as light
-    if (savedTheme === "light") {
-      return false;
-    }
-
-    // Default theme
     return true;
   });
 
-  // --------------------------------
-  // APPLY THEME TO <html>
-  // --------------------------------
   useEffect(() => {
     const root = document.documentElement;
 
@@ -53,9 +41,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* =========================
-          MAIN APPLICATION
-      ========================= */}
       <div
         className={`
           min-h-screen
@@ -68,63 +53,35 @@ function App() {
           }
         `}
       >
-        {/* =========================
-            NAVBAR
-        ========================= */}
-        <Navbar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-        />
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        {/* =========================
-            ROUTES
-        ========================= */}
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
 
           {/* Main Pages */}
           <Route path="/about" element={<About />} />
-
           <Route path="/explore" element={<Explore />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/stay" element={<StayPage />} />
+          
+          {/* Restaurants */}
+          <Route path="/eat" element={<EatPage />} />
+          <Route path="/eat/:slug" element={<RestaurantDetailsPage />} />
 
-          <Route
-            path="/experience"
-            element={<ExperiencePage />}
-          />
-
-          <Route
-            path="/stay"
-            element={<StayPage />}
-          />
-
-          <Route
-            path="/eat"
-            element={<EatPage />}
-          />
-
-          <Route
-            path="/gallery"
-            element={<GalleryPage />}
-          />
-
-          <Route
-            path="/contact"
-            element={<ContactPage />}
-          />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           {/* Tikkar Taal */}
-          <Route
-            path="/explore/tikkar-taal"
-            element={<TikkarTaal />}
-          />
+          <Route path="/explore/tikkar-taal" element={<TikkarTaal />} />
 
-          {/* Nearby Dynamic Pages */}
-          <Route
-            path="/nearby/:slug"
-            element={<NearbyDestinationPage />}
-          />
+          <Route path="/explore/:slug" element={<AttractionDetailsPage />} />
+
+          {/* Nearby */}
+          <Route path="/nearby/:slug" element={<NearbyDestinationPage />} />
         </Routes>
+
+        <Footer />
       </div>
     </BrowserRouter>
   );

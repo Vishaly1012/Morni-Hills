@@ -18,6 +18,7 @@ import {
   Sparkles,
   Sun,
 } from "lucide-react";
+import Footer from "./Footer.jsx";
 
 export default function Contact({ prefilledStay }) {
   const { contactInfo, faqs } = MORNI_DATA;
@@ -67,6 +68,7 @@ export default function Contact({ prefilledStay }) {
   };
 
   return (
+    <>
     <section
       id="contact"
       className={`py-${cssData.py} md:py-${cssData.md_py} relative bg-morni-light dark:bg-morni-dark transition-colors duration-500`}
@@ -484,6 +486,11 @@ export default function Contact({ prefilledStay }) {
           </div>
         </div>
       </div>
+                
     </section>
+    {/* <Footer /> */}
+    </>
+
   );
 }
+
