@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import {
-  Mountain,
   Menu,
   X,
   Sun,
@@ -13,6 +12,14 @@ import {
   Castle,
   Waves,
   MapPin,
+  Home,
+  Info,
+  Compass,
+  Utensils,
+  Sparkles,
+  Images,
+  Mail,
+  ArrowRight,
 } from "lucide-react";
 
 /* =========================================================
@@ -20,12 +27,21 @@ import {
 ========================================================= */
 
 const NAV_LINKS = [
-  { name: "Home", href: "/" },
+  {
+    name: "Home",
+    href: "/",
+    icon: Home,
+  },
 
-  { name: "About", href: "/about" },
+  {
+    name: "About",
+    href: "/about",
+    icon: Info,
+  },
 
   {
     name: "Explore",
+    icon: Compass,
     dropdown: [
       {
         name: "Morni Fort",
@@ -40,74 +56,195 @@ const NAV_LINKS = [
         icon: Waves,
         description: "Lakeside & boating",
       },
-
-      {
-        name: "Resorts & Stays",
-        href: "/stay",
-        icon: Hotel,
-        description: "Hotels & peaceful stays",
-      },
-
-      // {
-      //   name: "Nearby Places",
-      //   href: "/nearby",
-      //   icon: MapPin,
-      //   description: "Places around Morni",
-      // },
     ],
+  },
+
+  {
+    name: "Stay",
+    href: "/stay",
+    icon: Hotel,
+  },
+
+  {
+    name: "Eat",
+    href: "/eat",
+    icon: Utensils,
   },
 
   {
     name: "Experience",
     href: "/experience",
+    icon: Sparkles,
   },
 
-  // {
-  //   name: "Stay",
-  //   href: "/stay",
-  // },
 
   {
     name: "Contact",
     href: "/contact",
+    icon: Mail,
   },
 ];
+
+/* =========================================================
+   MORNI HILLS LOGO
+========================================================= */
+
+function MorniLogo({ small = false }) {
+  return (
+    <div className="flex items-center gap-2">
+      {/* Mountain Emblem */}
+      <div
+        className={`
+          flex
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-[#d8ad5c]/70
+          bg-[#245441]/90
+          shadow-[0_4px_18px_rgba(0,0,0,0.20)]
+          backdrop-blur-md
+          transition-all
+          duration-300
+          ${
+            small
+              ? "h-8 w-8"
+              : "h-8 w-8 sm:h-9 sm:w-9"
+          }
+        `}
+      >
+        <svg
+          viewBox="0 0 50 50"
+          className={
+            small
+              ? "h-4 w-4"
+              : "h-[17px] w-[17px]"
+          }
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M9 36L19 18L26 27L34 14L42 36H9Z"
+            stroke="#E4B95E"
+            strokeWidth="2.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          <path
+            d="M19 18L23 24"
+            stroke="#E4B95E"
+            strokeWidth="2.7"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* Wordmark */}
+      <div className="flex flex-col">
+        <div
+          className={`
+            font-serif
+            font-bold
+            leading-none
+            tracking-[0.17em]
+            text-white
+            drop-shadow-[0_2px_7px_rgba(0,0,0,0.45)]
+            ${
+              small
+                ? "text-sm"
+                : "text-[19px] sm:text-[21px] md:text-[23px]"
+            }
+          `}
+        >
+          MORNI
+        </div>
+
+        <div
+          className={`
+            mt-0.5
+            text-center
+            font-medium
+            uppercase
+            tracking-[0.42em]
+            text-[#e4b95e]
+            ${
+              small
+                ? "text-[5px]"
+                : "text-[6px] sm:text-[7px]"
+            }
+          `}
+        >
+          HILLS
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* =========================================================
    NAVBAR COMPONENT
 ========================================================= */
 
-export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
+export default function Navbar({
+  darkMode,
+  setDarkMode,
+  onOpenPlanner,
+}) {
   const location = useLocation();
-
-  // console.log("Dark mode toggled:", darkMode, setDarkMode)
 
   /* =======================================================
      STATE
   ======================================================= */
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  /* =======================================================
+     RESTORE SAVED THEME
+  ======================================================= */
 
-  const [openDropdown, setOpenDropdown] = useState(null);
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("morni-theme");
 
-  const [mobileDropdown, setMobileDropdown] = useState(null);
+    if (savedTheme === "dark" && !darkMode) {
+      setDarkMode?.(true);
+    }
+
+    if (savedTheme === "light" && darkMode) {
+      setDarkMode?.(false);
+    }
+  }, []);
+
+  /* =======================================================
+     SAVE THEME
+  ======================================================= */
+
+  useEffect(() => {
+    if (typeof darkMode === "boolean") {
+      localStorage.setItem(
+        "morni-theme",
+        darkMode ? "dark" : "light"
+      );
+    }
+  }, [darkMode]);
 
   /* =======================================================
      SCROLL DETECTION
   ======================================================= */
-  // console.log("Dark mode toggled:", typeof setDarkMode);
-  React.useEffect(() => {
+
+  useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 30);
     };
+
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
-
-    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -118,12 +255,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
      ESCAPE KEY
   ======================================================= */
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        setOpenDropdown(null);
-        setMobileDropdown(null);
-        setMobileMenuOpen(false);
+        setMenuOpen(false);
+        setExploreOpen(false);
       }
     };
 
@@ -135,30 +271,32 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
   }, []);
 
   /* =======================================================
-     CLOSE MENU AFTER ROUTE CHANGE
+     BODY SCROLL LOCK
   ======================================================= */
 
-  React.useEffect(() => {
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
-    setMobileDropdown(null);
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  /* =======================================================
+     CLOSE MENU ON ROUTE CHANGE
+  ======================================================= */
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setExploreOpen(false);
   }, [location.pathname]);
 
   /* =======================================================
-     MOBILE DROPDOWN
-  ======================================================= */
-
-  const handleMobileDropdown = (name) => {
-    setMobileDropdown(mobileDropdown === name ? null : name);
-  };
-
-  /* =======================================================
-     CHECK ACTIVE PAGE
+     ACTIVE PAGE
   ======================================================= */
 
   const isActivePage = (href) => {
@@ -170,13 +308,27 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
   };
 
   /* =======================================================
-     CLOSE MENUS
+     CLOSE MENU
   ======================================================= */
 
-  const closeMenus = () => {
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
-    setMobileDropdown(null);
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setExploreOpen(false);
+  };
+
+  /* =======================================================
+     THEME TOGGLE
+  ======================================================= */
+
+  const handleThemeToggle = () => {
+    const nextTheme = !darkMode;
+
+    setDarkMode?.(nextTheme);
+
+    localStorage.setItem(
+      "morni-theme",
+      nextTheme ? "dark" : "light"
+    );
   };
 
   /* =======================================================
@@ -192,11 +344,11 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
       <header
         className={`
           fixed
-          top-0
           left-0
           right-0
-          z-50
-
+          top-0
+          z-[9999]
+          w-full
           transition-all
           duration-500
           ease-out
@@ -204,1188 +356,773 @@ export default function Navbar({ darkMode, setDarkMode, onOpenPlanner }) {
           ${
             isScrolled
               ? `
-                bg-black/[0.18]
-                backdrop-blur-[26px]
-
                 border-b
-                border-white/[0.12]
-
-                shadow-[0_10px_40px_rgba(0,0,0,0.16)]
-
-                py-3
+                border-white/10
+                bg-[#10201c]/80
+                py-1.5
+                shadow-[0_8px_30px_rgba(0,0,0,0.18)]
+                backdrop-blur-2xl
               `
               : `
                 bg-gradient-to-b
-                from-black/55
+                from-black/60
                 via-black/20
                 to-transparent
-
-                py-5
+                py-2
               `
           }
         `}
       >
         <div
           className="
-            max-w-7xl
             mx-auto
-
+            w-full
+            max-w-[1400px]
             px-4
-            sm:px-6
-            lg:px-8
+            sm:px-8
+            lg:px-10
           "
         >
-          {/* =================================================
-              MAIN NAVIGATION
-          ================================================= */}
+          {/* Three-column layout keeps logo perfectly centered */}
 
           <div
             className="
-              flex
+              grid
+              w-full
+              grid-cols-3
               items-center
-              justify-between
             "
           >
             {/* =================================================
-                LOGO
+                LEFT — MENU
             ================================================= */}
 
-            <Link
-              to="/"
-              onClick={closeMenus}
-              className="
-                flex
-                items-center
-                gap-2.5
-
-                group
-                cursor-pointer
-                select-none
-
-                drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]
-              "
-            >
-              {/* LOGO ICON */}
-
-              <div
+            <div className="flex justify-start">
+              <button
+                type="button"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open navigation menu"
+                aria-expanded={menuOpen}
                 className="
-                  w-10
-                  h-10
-
-                  rounded-xl
-
-                  bg-gradient-to-br
-                  from-morni-primary
-                  to-morni-secondary/80
-
+                  group
                   flex
                   items-center
-                  justify-center
-
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/10
+                  px-3
+                  py-2
                   text-white
-
-                  shadow-lg
-                  shadow-morni-primary/25
-
+                  shadow-[0_6px_24px_rgba(0,0,0,0.14)]
+                  backdrop-blur-xl
                   transition-all
-                  duration-500
-                  ease-out
-
-                  group-hover:scale-105
+                  duration-300
+                  hover:scale-[1.02]
+                  hover:border-[#d8ad5c]/60
+                  hover:bg-white/15
+                  active:scale-95
                 "
               >
-                <Mountain
-                  className="
-                    w-5
-                    h-5
-
-                    transition-transform
-                    duration-500
-
-                    group-hover:-translate-y-0.5
-                  "
-                />
-              </div>
-
-              {/* LOGO TEXT */}
-
-              <div>
                 <span
                   className="
-                    font-serif
-
-                    text-xl
-                    sm:text-2xl
-
-                    font-bold
-
-                    tracking-wider
-
-                    text-white
-
                     flex
+                    h-6
+                    w-6
                     items-center
-                    gap-1.5
+                    justify-center
+                    rounded-full
+                    bg-white/10
                   "
                 >
-                  MORNI
-                  <span
+                  <Menu
                     className="
-                      text-morni-accent
-
-                      font-sans
-                      font-light
-
-                      text-sm
-
-                      tracking-widest
-
-                      uppercase
+                      h-[16px]
+                      w-[16px]
+                      transition-transform
+                      duration-300
+                      group-hover:rotate-3
                     "
-                  >
-                    Hills
-                  </span>
+                    strokeWidth={1.8}
+                  />
                 </span>
 
                 <span
                   className="
                     hidden
-                    sm:block
-
                     text-[10px]
-
-                    tracking-widest
-
+                    font-semibold
                     uppercase
-
-                    text-morni-secondary/90
-
-                    -mt-1
-
-                    font-medium
+                    tracking-[0.2em]
+                    sm:block
                   "
                 >
-                  Haryana Tourism
+                  Menu
                 </span>
-              </div>
-            </Link>
-
-            {/* =================================================
-                DESKTOP NAVIGATION
-            ================================================= */}
-
-            <nav
-              className="
-                hidden
-                xl:flex
-
-                items-center
-
-                space-x-1
-              "
-            >
-              {NAV_LINKS.map((link) => {
-                const hasDropdown = Boolean(link.dropdown);
-
-                const isActive = link.href ? isActivePage(link.href) : false;
-
-                return (
-                  <div
-                    key={link.name}
-                    className={`
-                      relative
-
-                      ${hasDropdown ? "explore-dropdown" : ""}
-                    `}
-                    onMouseEnter={() => {
-                      if (hasDropdown) {
-                        setOpenDropdown(link.name);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (hasDropdown) {
-                        setOpenDropdown(null);
-                      }
-                    }}
-                  >
-                    {/* =================================================
-                        NORMAL NAV LINK
-                    ================================================= */}
-
-                    {!hasDropdown ? (
-                      <Link
-                        to={link.href}
-                        onClick={closeMenus}
-                        className={`
-                          relative
-
-                          px-3.5
-                          py-2
-
-                          flex
-                          items-center
-
-                          text-xs
-
-                          font-medium
-
-                          uppercase
-
-                          tracking-wider
-
-                          transition-all
-                          duration-300
-                          ease-out
-
-                          drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
-
-                          ${
-                            isActive
-                              ? `
-                                text-morni-accent
-                                font-bold
-                              `
-                              : `
-                                text-white/85
-                                hover:text-white
-                              `
-                          }
-                        `}
-                      >
-                        <span>{link.name}</span>
-
-                        {isActive && (
-                          <span
-                            className="
-                              absolute
-
-                              bottom-0
-
-                              left-3.5
-                              right-3.5
-
-                              h-[2px]
-
-                              rounded-full
-
-                              bg-morni-accent
-
-                              transition-all
-                              duration-300
-                            "
-                          />
-                        )}
-                      </Link>
-                    ) : (
-                      /* =================================================
-                         EXPLORE BUTTON
-                      ================================================= */
-
-                      <button
-                        type="button"
-                        aria-expanded={openDropdown === link.name}
-                        className={`
-                          relative
-
-                          px-3.5
-                          py-2
-
-                          flex
-                          items-center
-
-                          gap-1
-
-                          text-xs
-
-                          font-medium
-
-                          uppercase
-
-                          tracking-wider
-
-                          transition-all
-                          duration-300
-                          ease-out
-
-                          drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
-
-                          cursor-default
-
-                          ${
-                            location.pathname.startsWith("/explore")
-                              ? `
-                                text-morni-accent
-                                font-bold
-                              `
-                              : `
-                                text-white/85
-                                hover:text-white
-                              `
-                          }
-                        `}
-                      >
-                        <span>{link.name}</span>
-
-                        <ChevronDown
-                          className={`
-                            w-3.5
-                            h-3.5
-
-                            transition-transform
-                            duration-300
-
-                            ${openDropdown === link.name ? "rotate-180" : ""}
-                          `}
-                        />
-
-                        {location.pathname.startsWith("/explore") && (
-                          <span
-                            className="
-                              absolute
-
-                              bottom-0
-
-                              left-3.5
-                              right-3.5
-
-                              h-[2px]
-
-                              rounded-full
-
-                              bg-morni-accent
-                            "
-                          />
-                        )}
-                      </button>
-                    )}
-
-                    {/* =================================================
-                        DROPDOWN
-                    ================================================= */}
-
-                    {hasDropdown && (
-                      <div
-                        className={`
-                          absolute
-
-                          top-full
-
-                          left-1/2
-
-                          -translate-x-1/2
-
-                          z-50
-
-                          pt-4
-
-                          transition-all
-                          duration-300
-                          ease-out
-
-                          ${
-                            openDropdown === link.name
-                              ? `
-                                visible
-                                opacity-100
-                                translate-y-0
-                                pointer-events-auto
-                              `
-                              : `
-                                invisible
-                                opacity-0
-                                -translate-y-2
-                                pointer-events-none
-                              `
-                          }
-                        `}
-                      >
-                        {/* GLASS CARD */}
-
-                        <div
-                          className="
-                            relative
-
-                            w-[270px]
-
-                            overflow-hidden
-
-                            rounded-[18px]
-
-                            border
-                            border-white/45
-
-                            bg-white/[0.72]
-
-                            backdrop-blur-[30px]
-
-                            shadow-[0_20px_55px_rgba(0,0,0,0.22)]
-
-                            ring-1
-                            ring-black/[0.04]
-
-                            p-1.5
-                          "
-                        >
-                          {/* GLASS REFLECTION */}
-
-                          <div
-                            className="
-                              pointer-events-none
-
-                              absolute
-                              inset-0
-
-                              bg-gradient-to-br
-
-                              from-white/70
-
-                              via-white/30
-
-                              to-white/[0.08]
-                            "
-                          />
-
-                          {/* TOP LIGHT */}
-
-                          <div
-                            className="
-                              pointer-events-none
-
-                              absolute
-
-                              top-0
-
-                              left-8
-                              right-8
-
-                              h-px
-
-                              bg-gradient-to-r
-
-                              from-transparent
-
-                              via-white
-
-                              to-transparent
-                            "
-                          />
-
-                          {/* SOFT GLOW */}
-
-                          <div
-                            className="
-                              pointer-events-none
-
-                              absolute
-
-                              -top-16
-
-                              left-1/2
-
-                              -translate-x-1/2
-
-                              w-32
-                              h-32
-
-                              rounded-full
-
-                              bg-morni-accent/10
-
-                              blur-3xl
-                            "
-                          />
-
-                          {/* DROPDOWN ITEMS */}
-
-                          <div
-                            className="
-                              relative
-
-                              flex
-                              flex-col
-
-                              gap-0.5
-                            "
-                          >
-                            {link.dropdown.map((item) => {
-                              const Icon = item.icon;
-
-                              return (
-                                <Link
-                                  key={item.name}
-                                  to={item.href}
-                                  onClick={closeMenus}
-                                  className="
-                                      group
-
-                                      flex
-                                      items-center
-
-                                      gap-3
-
-                                      rounded-xl
-
-                                      px-3
-                                      py-2.5
-
-                                      text-slate-900
-
-                                      transition-all
-                                      duration-300
-
-                                      hover:bg-black/[0.05]
-
-                                      hover:translate-x-[2px]
-                                    "
-                                >
-                                  {/* ICON */}
-
-                                  <div
-                                    className="
-                                        flex
-
-                                        h-8
-                                        w-8
-
-                                        shrink-0
-
-                                        items-center
-                                        justify-center
-
-                                        rounded-lg
-
-                                        bg-white/55
-
-                                        border
-                                        border-white/60
-
-                                        shadow-[0_3px_12px_rgba(0,0,0,0.05)]
-
-                                        transition-all
-                                        duration-300
-
-                                        group-hover:bg-morni-accent/15
-
-                                        group-hover:border-morni-accent/30
-
-                                        group-hover:scale-105
-                                      "
-                                  >
-                                    <Icon
-                                      className="
-                                          w-4
-                                          h-4
-
-                                          text-slate-700
-
-                                          transition-colors
-                                          duration-300
-
-                                          group-hover:text-morni-primary
-                                        "
-                                      strokeWidth={1.8}
-                                    />
-                                  </div>
-
-                                  {/* TEXT */}
-
-                                  <div
-                                    className="
-                                        min-w-0
-                                        flex-1
-                                      "
-                                  >
-                                    <span
-                                      className="
-                                          block
-
-                                          text-[13px]
-
-                                          font-semibold
-
-                                          leading-tight
-
-                                          tracking-wide
-
-                                          text-slate-900
-
-                                          transition-colors
-                                          duration-300
-
-                                          group-hover:text-morni-primary
-                                        "
-                                    >
-                                      {item.name}
-                                    </span>
-
-                                    <span
-                                      className="
-                                          block
-
-                                          mt-[3px]
-
-                                          text-[10px]
-
-                                          leading-tight
-
-                                          text-slate-500
-                                        "
-                                    >
-                                      {item.description}
-                                    </span>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* =================================================
-                DESKTOP RIGHT CONTROLS
-            ================================================= */}
-
-            <div
-              className="
-                hidden
-                sm:flex
-
-                items-center
-
-                gap-3
-              "
-            >
-              {/* DARK MODE */}
-
-              <button
-                type="button"
-                onClick={() => {
-                  setDarkMode(!darkMode);
-                  console.log("Dark mode toggled:", !darkMode);
-                }}
-                aria-label="Toggle dark mode"
-                className="
-                  p-2.5
-
-                  rounded-full
-
-                  bg-white/[0.08]
-
-                  hover:bg-white/[0.15]
-
-                  text-white
-
-                  backdrop-blur-xl
-
-                  border
-                  border-white/20
-
-                  shadow-[0_8px_25px_rgba(0,0,0,0.12)]
-
-                  transition-all
-                  duration-300
-
-                  hover:scale-105
-
-                  cursor-pointer
-                "
-              >
-                {darkMode ? (
-                  <Sun
-                    className="
-                      w-4
-                      h-4
-
-                      text-morni-accent
-                    "
-                  />
-                ) : (
-                  <Moon
-                    className="
-                      w-4
-                      h-4
-
-                      text-morni-secondary
-                    "
-                  />
-                )}
-              </button>
-
-              {/* PLAN YOUR VISIT */}
-
-              {/* <Link
-                to="/contact"
-                onClick={(event) => {
-                  closeMenus();
-                  if (onOpenPlanner) {
-                    event.preventDefault();
-                    onOpenPlanner();
-                  }
-                }}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-semibold
-
-                  text-xs
-
-                  uppercase
-
-                  tracking-wider
-
-                  text-white
-
-                  bg-white/[0.09]
-
-                  hover:bg-morni-accent
-
-                  hover:text-morni-dark
-
-                  backdrop-blur-xl
-
-                  border
-                  border-white/25
-
-                  shadow-[0_8px_28px_rgba(0,0,0,0.15)]
-
-                  transition-all
-                  duration-300
-
-                  hover:-translate-y-0.5
-
-                  cursor-pointer
-
-                  group
-                "
-              >
-                
-              </Link> */}
-            </div>
-
-            {/* =================================================
-                MOBILE CONTROLS
-            ================================================= */}
-
-            <div
-              className="
-                flex
-                xl:hidden
-
-                items-center
-
-                gap-2
-              "
-            >
-              {/* MOBILE DARK MODE */}
-
-              <button
-                type="button"
-                onClick={() => {
-                  setDarkMode(!darkMode);
-                }}
-                aria-label="Toggle dark mode"
-                className="
-                  p-2
-
-                  rounded-full
-
-                  bg-white/10
-
-                  text-white
-
-                  backdrop-blur-xl
-
-                  border
-                  border-white/15
-
-                  transition-all
-                  duration-300
-
-                  hover:bg-white/20
-                "
-              >
-                {darkMode ? (
-                  <Sun
-                    className="
-                      w-4
-                      h-4
-
-                      text-morni-accent
-                    "
-                  />
-                ) : (
-                  <Moon
-                    className="
-                      w-4
-                      h-4
-
-                      text-morni-secondary
-                    "
-                  />
-                )}
-              </button>
-
-              {/* MOBILE MENU */}
-
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Open menu"
-                aria-expanded={mobileMenuOpen}
-                className="
-                  p-2.5
-
-                  rounded-xl
-
-                  bg-white/10
-
-                  hover:bg-white/20
-
-                  text-white
-
-                  backdrop-blur-xl
-
-                  border
-                  border-white/15
-
-                  transition-all
-                  duration-300
-                "
-              >
-                {mobileMenuOpen ? (
-                  <X
-                    className="
-                      w-5
-                      h-5
-                    "
-                  />
-                ) : (
-                  <Menu
-                    className="
-                      w-5
-                      h-5
-                    "
-                  />
-                )}
               </button>
             </div>
-          </div>
-        </div>
-
-        {/* =====================================================
-            MOBILE MENU
-        ===================================================== */}
-
-        <div
-          className={`
-            xl:hidden
-
-            overflow-hidden
-
-            transition-all
-            duration-500
-            ease-out
-
-            ${
-              mobileMenuOpen
-                ? `
-                  max-h-[800px]
-                  opacity-100
-                `
-                : `
-                  max-h-0
-                  opacity-0
-                  pointer-events-none
-                `
-            }
-          `}
-        >
-          <div
-            className="
-              bg-black/[0.35]
-
-              backdrop-blur-[30px]
-
-              px-6
-              py-6
-
-              border-b
-              border-white/15
-
-              shadow-[0_25px_60px_rgba(0,0,0,0.30)]
-            "
-          >
-            {/* MOBILE LINKS */}
-
-            <div
-              className="
-                flex
-                flex-col
-
-                gap-1
-              "
-            >
-              {NAV_LINKS.map((link) => {
-                const hasDropdown = Boolean(link.dropdown);
-
-                const isActive = link.href ? isActivePage(link.href) : false;
-
-                return (
-                  <div key={link.name}>
-                    {/* NORMAL LINK */}
-
-                    {!hasDropdown ? (
-                      <Link
-                        to={link.href}
-                        onClick={closeMenus}
-                        className={`
-                          flex
-                          items-center
-                          justify-between
-
-                          px-4
-                          py-3
-
-                          rounded-xl
-
-                          text-xs
-
-                          font-medium
-
-                          uppercase
-
-                          tracking-wider
-
-                          transition-all
-                          duration-300
-
-                          ${
-                            isActive
-                              ? `
-                                text-morni-accent
-                                bg-white/10
-                                font-bold
-                              `
-                              : `
-                                text-white/90
-                                hover:text-morni-accent
-                                hover:bg-white/10
-                              `
-                          }
-                        `}
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <>
-                        {/* MOBILE EXPLORE */}
-
-                        <button
-                          type="button"
-                          onClick={() => handleMobileDropdown(link.name)}
-                          className={`
-                            w-full
-
-                            flex
-                            items-center
-                            justify-between
-
-                            px-4
-                            py-3
-
-                            rounded-xl
-
-                            text-xs
-
-                            font-medium
-
-                            uppercase
-
-                            tracking-wider
-
-                            transition-all
-                            duration-300
-
-                            ${
-                              location.pathname.startsWith("/explore")
-                                ? `
-                                  text-morni-accent
-                                  bg-white/10
-                                  font-bold
-                                `
-                                : `
-                                  text-white/90
-                                  hover:text-morni-accent
-                                  hover:bg-white/10
-                                `
-                            }
-                          `}
-                        >
-                          <span>{link.name}</span>
-
-                          <ChevronDown
-                            className={`
-                              w-4
-                              h-4
-
-                              transition-transform
-                              duration-300
-
-                              ${
-                                mobileDropdown === link.name ? "rotate-180" : ""
-                              }
-                            `}
-                          />
-                        </button>
-
-                        {/* MOBILE SUBMENU */}
-
-                        <div
-                          className={`
-                            overflow-hidden
-
-                            transition-all
-                            duration-300
-                            ease-out
-
-                            ${
-                              mobileDropdown === link.name
-                                ? `
-                                  max-h-[500px]
-                                  opacity-100
-                                `
-                                : `
-                                  max-h-0
-                                  opacity-0
-                                `
-                            }
-                          `}
-                        >
-                          <div className=" ml-4 mt-1 pl-3 border-l border-morni-accent/30 flex flex-col gap-0.5">
-                            {link.dropdown.map((item) => {
-                              const Icon = item.icon;
-
-                              return (
-                                <Link
-                                  key={item.name}
-                                  to={item.href}
-                                  onClick={closeMenus}
-                                  className="
-                                      flex
-                                      items-center
-
-                                      gap-3
-
-                                      px-3
-                                      py-2.5
-
-                                      rounded-lg
-
-                                      text-white/70
-
-                                      hover:text-white
-
-                                      hover:bg-white/10
-
-                                      transition-all
-                                      duration-300
-                                    "
-                                >
-                                  <Icon
-                                    className="
-                                        w-4
-                                        h-4
-
-                                        text-morni-accent
-                                      "
-                                  />
-
-                                  <span>{item.name}</span>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
 
             {/* =================================================
-                MOBILE PLAN BUTTON
+                CENTER — MORNI HILLS LOGO
             ================================================= */}
 
-            <div
-              className="
-                pt-4
-                mt-4
-
-                border-t
-                border-white/10
-              "
-            >
+            <div className="flex justify-center">
               <Link
-                to="/contact"
-                onClick={(event) => {
-                  closeMenus();
-
-                  if (onOpenPlanner) {
-                    event.preventDefault();
-                    onOpenPlanner();
-                  }
-                }}
+                to="/"
+                onClick={closeMenu}
+                aria-label="Morni Hills Home"
                 className="
-                  w-full
-
-                  py-3
-
-                  rounded-full
-
-                  text-center
-
-                  text-xs
-
-                  uppercase
-
-                  tracking-wider
-
-                  font-semibold
-
+                  group
+                  relative
                   flex
                   items-center
                   justify-center
-
-                  gap-2
-
-                  bg-morni-accent
-
-                  text-morni-dark
-
-                  hover:brightness-105
-
-                  transition-all
-                  duration-300
-
-                  shadow-lg
+                  select-none
                 "
               >
-                <Calendar
+                <MorniLogo />
+{/* 
+                <span
                   className="
-                    w-4
-                    h-4
+                    absolute
+                    mt-[51px]
+                    hidden
+                    whitespace-nowrap
+                    text-[6px]
+                    font-medium
+                    uppercase
+                    tracking-[0.34em]
+                    text-white/55
+                    md:block
                   "
-                />
-
-                <span>Plan Your Visit</span>
+                > */}
+                  {/* Haryana Tourism */}
+                {/* </span> */}
               </Link>
+            </div>
+
+            {/* =================================================
+                RIGHT — THEME
+            ================================================= */}
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={handleThemeToggle}
+                aria-label={
+                  darkMode
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
+                className="
+                  group
+                  relative
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-white/20
+                  bg-white/10
+                  text-white
+                  shadow-[0_6px_24px_rgba(0,0,0,0.14)]
+                  backdrop-blur-xl
+                  transition-all
+                  duration-300
+                  hover:scale-105
+                  hover:border-[#d8ad5c]/60
+                  hover:bg-white/15
+                  active:scale-95
+                  sm:h-10
+                  sm:w-10
+                "
+              >
+                {darkMode ? (
+                  <Sun
+                    className="
+                      h-[17px]
+                      w-[17px]
+                      text-[#e4b95e]
+                      transition-all
+                      duration-500
+                      group-hover:rotate-45
+                    "
+                    strokeWidth={1.7}
+                  />
+                ) : (
+                  <Moon
+                    className="
+                      h-[17px]
+                      w-[17px]
+                      text-white
+                      transition-all
+                      duration-500
+                      group-hover:-rotate-12
+                    "
+                    strokeWidth={1.7}
+                  />
+                )}
+              </button>
             </div>
           </div>
         </div>
       </header>
+
+      {/* =====================================================
+          OVERLAY
+      ===================================================== */}
+
+      <div
+        onClick={closeMenu}
+        aria-hidden="true"
+        className={`
+          fixed
+          inset-0
+          z-[10000]
+          bg-black/55
+          backdrop-blur-[4px]
+          transition-all
+          duration-500
+
+          ${
+            menuOpen
+              ? "pointer-events-auto visible opacity-100"
+              : "pointer-events-none invisible opacity-0"
+          }
+        `}
+      />
+
+      {/* =====================================================
+          SIDE DRAWER
+      ===================================================== */}
+
+      <aside
+        aria-label="Main navigation"
+        className={`
+          fixed
+          bottom-0
+          left-0
+          top-0
+          z-[10001]
+          w-[88%]
+          max-w-[470px]
+          overflow-y-auto
+          overscroll-contain
+          border-r
+          border-white/10
+          bg-[#10201c]
+          shadow-[20px_0_70px_rgba(0,0,0,0.40)]
+          transition-transform
+          duration-500
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+
+          ${
+            menuOpen
+              ? "translate-x-0"
+              : "-translate-x-full"
+          }
+        `}
+      >
+        {/* ===================================================
+            DRAWER HEADER
+        =================================================== */}
+
+        <div
+          className="
+            sticky
+            top-0
+            z-20
+            border-b
+            border-white/10
+            bg-[#10201c]/95
+            px-6
+            pb-5
+            pt-5
+            backdrop-blur-2xl
+            sm:px-8
+          "
+        >
+          <div className="flex items-center justify-between">
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className="group"
+            >
+              <MorniLogo small />
+
+              <div
+                className="
+                  mt-2
+                  text-[7px]
+                  uppercase
+                  tracking-[0.3em]
+                  text-white/40
+                "
+              >
+                Haryana Tourism
+              </div>
+            </Link>
+
+            <button
+              type="button"
+              onClick={closeMenu}
+              aria-label="Close navigation menu"
+              className="
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-white/10
+                bg-white/5
+                text-white/80
+                transition-all
+                duration-300
+                hover:rotate-90
+                hover:bg-white/10
+                hover:text-white
+                active:scale-95
+              "
+            >
+              <X
+                className="h-[18px] w-[18px]"
+                strokeWidth={1.7}
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* ===================================================
+            DRAWER CONTENT
+        =================================================== */}
+
+        <div className="px-6 py-8 sm:px-8">
+          {/* Intro */}
+
+          <div className="mb-8">
+            <p
+              className="
+                text-[9px]
+                font-semibold
+                uppercase
+                tracking-[0.35em]
+                text-[#e4b95e]
+              "
+            >
+              Discover Morni
+            </p>
+
+            <h2
+              className="
+                mt-2
+                font-serif
+                text-2xl
+                font-semibold
+                leading-tight
+                text-white
+                sm:text-3xl
+              "
+            >
+              Explore the beauty
+              <br />
+              of the hills.
+            </h2>
+          </div>
+
+          {/* =================================================
+              NAVIGATION LINKS
+          ================================================= */}
+
+          <nav className="space-y-1">
+            {NAV_LINKS.map((link, index) => {
+              const Icon = link.icon;
+              const hasDropdown = Boolean(link.dropdown);
+
+              const isActive = link.href
+                ? isActivePage(link.href)
+                : location.pathname.startsWith("/explore");
+
+              {/* =================================================
+                  NORMAL LINK
+              ================================================= */}
+
+              if (!hasDropdown) {
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={closeMenu}
+                    className={`
+                      group
+                      flex
+                      w-full
+                      items-center
+                      gap-4
+                      rounded-xl
+                      px-4
+                      py-3.5
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? "bg-white/10 text-[#e4b95e]"
+                          : "text-white/70 hover:bg-white/[0.06] hover:text-white"
+                      }
+                    `}
+                  >
+                    <span
+                      className="
+                        w-5
+                        text-[9px]
+                        tracking-widest
+                        text-white/25
+                      "
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <Icon
+                      className={`
+                        h-[18px]
+                        w-[18px]
+                        shrink-0
+                        transition-all
+                        duration-300
+
+                        ${
+                          isActive
+                            ? "text-[#e4b95e]"
+                            : "text-white/40 group-hover:text-[#e4b95e]"
+                        }
+
+                        group-hover:translate-x-0.5
+                      `}
+                      strokeWidth={1.7}
+                    />
+
+                    <span
+                      className="
+                        flex-1
+                        text-sm
+                        font-medium
+                        tracking-wide
+                      "
+                    >
+                      {link.name}
+                    </span>
+
+                    <ArrowRight
+                      className="
+                        h-4
+                        w-4
+                        -translate-x-2
+                        text-[#e4b95e]
+                        opacity-0
+                        transition-all
+                        duration-300
+                        group-hover:translate-x-0
+                        group-hover:opacity-100
+                      "
+                      strokeWidth={1.7}
+                    />
+                  </Link>
+                );
+              }
+
+              {/* =================================================
+                  EXPLORE
+              ================================================= */}
+
+              return (
+                <div key={link.name}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExploreOpen((prev) => !prev)
+                    }
+                    className={`
+                      group
+                      flex
+                      w-full
+                      items-center
+                      gap-4
+                      rounded-xl
+                      px-4
+                      py-3.5
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? "bg-white/10 text-[#e4b95e]"
+                          : "text-white/70 hover:bg-white/[0.06] hover:text-white"
+                      }
+                    `}
+                  >
+                    <span
+                      className="
+                        w-5
+                        text-[9px]
+                        tracking-widest
+                        text-white/25
+                      "
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <Icon
+                      className={`
+                        h-[18px]
+                        w-[18px]
+
+                        ${
+                          isActive
+                            ? "text-[#e4b95e]"
+                            : "text-white/40"
+                        }
+                      `}
+                      strokeWidth={1.7}
+                    />
+
+                    <span
+                      className="
+                        flex-1
+                        text-left
+                        text-sm
+                        font-medium
+                        tracking-wide
+                      "
+                    >
+                      {link.name}
+                    </span>
+
+                    <ChevronDown
+                      className={`
+                        h-4
+                        w-4
+                        transition-transform
+                        duration-300
+
+                        ${
+                          exploreOpen
+                            ? "rotate-180 text-[#e4b95e]"
+                            : "text-white/40"
+                        }
+                      `}
+                      strokeWidth={1.7}
+                    />
+                  </button>
+
+                  {/* Explore submenu */}
+
+                  <div
+                    className={`
+                      overflow-hidden
+                      transition-all
+                      duration-300
+
+                      ${
+                        exploreOpen
+                          ? "max-h-[300px] opacity-100"
+                          : "max-h-0 opacity-0"
+                      }
+                    `}
+                  >
+                    <div
+                      className="
+                        ml-9
+                        space-y-1
+                        border-l
+                        border-[#e4b95e]/20
+                        pl-4
+                      "
+                    >
+                      {link.dropdown.map((item) => {
+                        const ItemIcon = item.icon;
+
+                        const active =
+                          location.pathname === item.href;
+
+                        return (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            onClick={closeMenu}
+                            className={`
+                              group
+                              flex
+                              items-center
+                              gap-3
+                              rounded-lg
+                              px-3
+                              py-3
+                              transition-all
+                              duration-300
+
+                              ${
+                                active
+                                  ? "bg-[#e4b95e]/10 text-[#e4b95e]"
+                                  : "text-white/55 hover:bg-white/5 hover:text-white"
+                              }
+                            `}
+                          >
+                            <ItemIcon
+                              className="
+                                h-4
+                                w-4
+                                shrink-0
+                                text-[#e4b95e]
+                              "
+                              strokeWidth={1.7}
+                            />
+
+                            <div className="flex-1">
+                              <div className="text-xs font-medium">
+                                {item.name}
+                              </div>
+
+                              <div className="mt-0.5 text-[9px] text-white/35">
+                                {item.description}
+                              </div>
+                            </div>
+
+                            <ArrowRight
+                              className="
+                                h-3.5
+                                w-3.5
+                                -translate-x-1
+                                text-[#e4b95e]
+                                opacity-0
+                                transition-all
+                                duration-300
+                                group-hover:translate-x-0
+                                group-hover:opacity-100
+                              "
+                              strokeWidth={1.7}
+                            />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* =================================================
+              PLAN YOUR VISIT
+          ================================================= */}
+
+          {onOpenPlanner && (
+            <div
+              className="
+                mt-8
+                border-t
+                border-white/10
+                pt-7
+              "
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onOpenPlanner();
+                }}
+                className="
+                  group
+                  flex
+                  w-full
+                  items-center
+                  justify-between
+                  rounded-2xl
+                  bg-[#e4b95e]
+                  px-5
+                  py-3.5
+                  text-[#10201c]
+                  shadow-[0_10px_35px_rgba(216,168,91,0.18)]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:brightness-105
+                  active:scale-[0.98]
+                "
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-black/10
+                    "
+                  >
+                    <Calendar
+                      className="h-4 w-4"
+                      strokeWidth={1.8}
+                    />
+                  </div>
+
+                  <div className="text-left">
+                    <div
+                      className="
+                        text-[8px]
+                        font-semibold
+                        uppercase
+                        tracking-[0.2em]
+                        opacity-60
+                      "
+                    >
+                      Start your journey
+                    </div>
+
+                    <div className="mt-0.5 text-sm font-bold">
+                      Plan Your Visit
+                    </div>
+                  </div>
+                </div>
+
+                <ArrowRight
+                  className="
+                    h-5
+                    w-5
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  strokeWidth={1.8}
+                />
+              </button>
+            </div>
+          )}
+
+          {/* =================================================
+              FOOTER
+          ================================================= */}
+
+          <div className="mt-8 text-center">
+            <p
+              className="
+                text-[8px]
+                uppercase
+                tracking-[0.3em]
+                text-white/25
+              "
+            >
+              Discover • Explore • Experience
+            </p>
+          </div>
+        </div>
+      </aside>
     </>
   );
 }

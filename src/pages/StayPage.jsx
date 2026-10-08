@@ -41,7 +41,7 @@ const stays = [
     image:
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
     description:
-      "Enjoy comfortable rooms, peaceful surroundings and scenic views close to the lakes.",
+      "Enjoy comfortable rooms surroundings and scenic views close to the lakes.",
   },
 ];
 
@@ -124,47 +124,6 @@ function StayPage() {
       </section>
 
       {/* =====================================================
-          INTRO — MOUNTAIN BACKGROUND
-      ===================================================== */}
-
-      <section className="relative min-h-[520px] md:min-h-[580px] flex items-center overflow-hidden">
-        {/* Background Image */}
-        <img
-          src={tikkar_taal_stays}
-          alt="Morni Hills mountain stay"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        {/* Main Dark Overlay */}
-        <div className="absolute inset-0 bg-black/35" />
-
-        {/* Bottom Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
-          <ScrollReveal>
-            {/* Small Label */}
-            <span className="text-emerald-300 font-semibold uppercase tracking-[0.25em] text-sm">
-              Where To Stay
-            </span>
-
-            {/* Heading */}
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mt-5 leading-tight">
-              Wake Up To The Hills
-            </h2>
-
-            {/* Description */}
-            <p className="mt-6 text-lg md:text-xl text-white/90 leading-8 max-w-3xl mx-auto">
-              Make your Morni Hills trip more memorable by staying close to
-              nature. Choose a peaceful cottage, a comfortable resort or a
-              scenic retreat for your getaway.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* =====================================================
           STAYS
       ===================================================== */}
 
@@ -238,7 +197,7 @@ function StayPage() {
 
                   {/* Card Content */}
 
-                  <div className="p-6">
+                  <div className="p-6 flex flex-1 flex-col">
                     <div className="flex items-center justify-between gap-3">
                       <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
                         {stay.name}
@@ -258,7 +217,7 @@ function StayPage() {
 
                     {/* Description */}
 
-                    <p className="mt-3 text-slate-600 dark:text-white/60 leading-7">
+                    <p className="mt-3 min-h-[84px] text-slate-600 dark:text-white/60 leading-7">
                       {stay.description}
                     </p>
 
@@ -266,7 +225,7 @@ function StayPage() {
 
                     <button
                       className="
-                        mt-6
+                        mt-auto
                         w-full
                         flex
                         items-center
