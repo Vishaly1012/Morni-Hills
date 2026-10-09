@@ -93,7 +93,8 @@ function MorniLogo({ small = false }) {
   return (
     <div className="flex items-center gap-2">
       {/* Mountain Emblem */}
-      <div
+
+      {/* <div
         className={`
           flex
           shrink-0
@@ -139,7 +140,7 @@ function MorniLogo({ small = false }) {
             strokeLinecap="round"
           />
         </svg>
-      </div>
+      </div> */}
 
       {/* Wordmark */}
       <div className="flex flex-col">
